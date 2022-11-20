@@ -1,4 +1,4 @@
-# How to use BLIS
+# BLIS - Usage how-to
 
 ```{toctree}
 ---
