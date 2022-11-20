@@ -1,4 +1,4 @@
-# How to get access to BLIS
+# BLIS - Get access
 
 ```{toctree}
 ---

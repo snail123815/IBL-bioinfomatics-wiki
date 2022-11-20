@@ -34,4 +34,6 @@ At the right side of the issue you created, you will find "Development" section,
 
 After making changes to source code (`.md` files), enter `/docs` dir and run `make html`, then open `/docs/build/html/index.html` to see the result.
 
-Once it is satisfied, commit your changes to this branch, then create a pull request. One other people should be able to approve this and merge to `main` branch.
+Once it is satisfied, commit your changes to this branch, then create a pull request. One other people needs to approve this and merge (please do "squash and merge") to `main` branch.
+
+The document will then rebuild and publish automatically.

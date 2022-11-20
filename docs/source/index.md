@@ -1,4 +1,4 @@
-# IBL Bioinformatics wiki
+# IBL bioinformatics wiki
 
 Welcome to the wikipedia page for all researchers doing or willing to do some bioinformatics.
 
