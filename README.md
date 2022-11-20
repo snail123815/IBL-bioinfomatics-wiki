@@ -1,4 +1,8 @@
-# IBL bioinformatics wiki development
+# IBL bioinformatics wiki document co-authoring
+
+Address:
+
+[https://ibl-bioinfomatics-wiki.readthedocs.io/index.html](https://ibl-bioinfomatics-wiki.readthedocs.io/index.html)
 
 Source code of the documents are the `*.md` files located in `source/` dir.
 
@@ -8,12 +12,26 @@ For markdown syntax and special syntax for MyST (our markdown parser), please ch
 
 After a page is added, please create link in the `{toctree}` section of `index.md` file.
 
-The document will rebuild on pull requests.
+## How to make changes
 
-To test on your own environment, install with pip:
+### Prerequisites
 
-`pip install sphinx myst-parser`
+Clone this repository to your local machine. Make sure you have a python environment which has the following prerequisites:
 
-The project is not using these but may be better to add:
+- sphinx
+- myst-parser
+- sphinxcontrib-mermaid (not yet used)
 
-sphinxcontrib-mermaid
+Sphinx is a documentation generator that translates a set of plain text source files into output document. For us, is to translate markdown files to HTML files. Sphnix document can be found [here](https://www.sphinx-doc.org/en/master/usage/quickstart.html).
+
+(Simply write `.md` file if you do not want to build and test.)
+
+### General pipeline
+
+In issues, make a new issue explaining what you want to do. If it is simple, just a short title like "complete intro" would be enough. Assign this issue to yourself, submit this issue.
+
+At the right side of the issue you created, you will find "Development" section, create a branch for this issue and checkout locally.
+
+After making changes to source code (`.md` files), enter `/docs` dir and run `make html`, then open `/docs/build/html/index.html` to see the result.
+
+Once it is satisfied, commit your changes to this branch, then create a pull request. One other people should be able to approve this and merge to `main` branch.
