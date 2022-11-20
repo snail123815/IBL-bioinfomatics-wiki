@@ -7,7 +7,7 @@ maxdepth: 3
 ---
 ```
 
-## Howto
+## How to
 
 [https://pubappslu.atlassian.net/wiki/spaces/HPCWIKI/](https://pubappslu.atlassian.net/wiki/spaces/HPCWIKI/)
 
@@ -83,3 +83,7 @@ To get status of group quota, use
 `beegfs-ctl --getquota --gid pi-vriesendorpb`
 
 Yes, we only have 600GB, and it is almost full. Please do not store data on our shared space unless you want to share it.
+
+## Transfer data
+
+Refer to [BLIS usage](../blis/blis_usage.md#files-transfer).
