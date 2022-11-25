@@ -7,7 +7,7 @@ maxdepth: 3
 ---
 ```
 
-BLIS is currently a semi-managed computer by University ISSC. It is connected to the ULCN account system. As a result, your username = ULCN user name, password = ULCN password, and the password will change as you change your ULCN password.
+BLIS is currently a semi-managed computer by University ISSC. It is connected to the ULCN account system. As a result, your username = ULCN user name, password = ULCN password, and the password will change as you change your ULCN password. To use BLIS you will need access to a command line prompt. For OSX (Apple operating system) and Linux users, the command line is already installed, you can bring it up by typing "terminal" in spotlight, in OSX, or its equivalent for the specific distribution, or distro, in Linux. For Windows users, the prefered option will be WSL2 (Windows Subsystem for Linux) with the default distro: Ubuntu. You can find more detailed instruccions on how to install it [here](https://learn.microsoft.com/en-us/windows/wsl/install).
 
 ## Request for access
 
