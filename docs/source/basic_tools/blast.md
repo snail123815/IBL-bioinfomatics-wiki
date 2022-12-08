@@ -84,9 +84,9 @@ Commands avaliable: `blastn`, `blastp`, `blastx`, `tblastn`, `tblastx`, `makebla
 
 ### Setup Windows machine in bash environment (git for windows)
 
-1. Install https://gitforwindows.org/ first, you get access to `tar` command.
+1. Install [https://gitforwindows.org/](https://gitforwindows.org/) first, you get access to `tar` command.
 2. Download portable blast from NCBI:
-   - https://blast.ncbi.nlm.nih.gov/Blast.cgi -> Download BLAST
+   - [https://blast.ncbi.nlm.nih.gov/Blast.cgi](https://blast.ncbi.nlm.nih.gov/Blast.cgi) -> Download BLAST
    - ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/ -> ncbi-blast-2.13.0+-x64-win64.tar.gz
 3. Open 'Git Bash', change directory to the download files, do `tar xzf ncbi-blast-2.13.0+-x64-win64.tar.gz`
    - Equivalent to `tar -x -z -f ncbi-blast-2.13.0+-x64-win64.tar.gz`
@@ -115,7 +115,7 @@ USAGE
 Download the program and put it in your environment variables.
 
 1. Download portable blast from NCBI:
-   - https://blast.ncbi.nlm.nih.gov/Blast.cgi -> Download BLAST
+   - [https://blast.ncbi.nlm.nih.gov/Blast.cgi](https://blast.ncbi.nlm.nih.gov/Blast.cgi) -> Download BLAST
    - ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/ 
    - ncbi-blast-2.13.0+-x64-macosx.tar.gz 
    - ncbi-blast-2.13.0+-x64-linux.tar.gz
