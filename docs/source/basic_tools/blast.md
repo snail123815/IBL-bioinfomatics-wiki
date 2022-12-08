@@ -127,16 +127,50 @@ Download the program and put it in your environment variables.
 3. Put the directory `ncbi-blast-2.13.0+` in a location you can remember, eg. `cp -r ncbi-blast-2.13.0+ ~/`
 4. Put `~/ncbi-blast-2.13.0+/bin/` in your environment variables. `export PATH="~/ncbi-blast-2.13.0+/bin/:$PATH"`
 
+```shell
+$ cp -r ~/Downloads/ncbi-blast-2.13.0+ ~/
+$ ls ~/
+ncbi-blast-2.13.0+
+$ export PATH="~/ncbi-blast-2.13.0+/bin/:$PATH"
+```
+
+:::{NOTE}
+You have to run `export PATH="~/ncbi-blast-2.13.0+/bin/:$PATH"` after every restart of your termial. If you want it to be permenent, do this:
+
+```shell
+echo 'export PATH="~/ncbi-blast-2.13.0+/bin/:$PATH"' >> ~/.zshrc
+```
+
+(assuming you are using the default shell from MacOS)
+:::
+
 #### Solution 2
 
 Use a package manager.
 
 ##### Linux
 
-Need **sudo** right. Ubuntu and other Debian based system:
+Need **sudo** right.
+
+Ubuntu and other Debian based system:
 
 ```shell
 sudo apt install ncbi-blast+
+```
+
+Centos or other RedHat based system:
+
+Download `ncbi-blast-2.13.0-1.x86_64.rpm` from  
+ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/ 
+
+```shell
+sudo dnf install ~/Downloads/ncbi-blast-2.13.0-1.x86_64.rpm
+```
+
+! not tested, but should work across platforms and do not need sudo right.
+
+```shell
+pkcon install ncbi-blast+
 ```
 
 ##### MacOS
