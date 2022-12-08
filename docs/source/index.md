@@ -18,3 +18,11 @@ maxdepth: 2
 ---
 alice/alice_ibl.md
 ```
+
+```{toctree}
+---
+caption: Basic bioinformatics tools
+maxdepth: 2
+---
+basic_tools/blast.md
+```
