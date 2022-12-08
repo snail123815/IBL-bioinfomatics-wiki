@@ -40,3 +40,18 @@ html_sidebars = {
 # -- MyST settings -----------------------------------------------------------
 # https://myst-parser.readthedocs.io/en/latest/syntax/syntax.html
 myst_heading_anchors = 3
+myst_enable_extensions = [
+    "amsmath",
+    "colon_fence",
+    "deflist",
+    "dollarmath",
+    "fieldlist",
+    "html_admonition",
+    "html_image",
+    # "linkify",
+    "replacements",
+    "smartquotes",
+    "strikethrough",
+    "substitution",
+    "tasklist",
+]
