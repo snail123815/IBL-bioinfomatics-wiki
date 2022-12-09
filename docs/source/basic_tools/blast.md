@@ -40,7 +40,7 @@ Variants of file extensions:
 
 ## How BLAST works
 
-- Which program
+- BLAST comes with multiple programs for different tasks
   - blastn
     - Query: nucleic acid sequence(s)
     - Database: nucleic acid sequences
@@ -62,25 +62,36 @@ Variants of file extensions:
     - Automatically translate **database** to amino acid sequences (all frames)
 - Query
   - A fasta file/text (one or multiple sequences)
-- Database
-  - RefSeq? Non-redudant? WGS?
+- Database (Target)
+  - On NCBI website: RefSeq? Non-redudant? WGS?
   - Local
-    - One genome
-    - One proteome
-    - Manual combination of sequences
+    - Custom genome(s)
+    - Custom proteome(s)
+    - Any combination of sequences of same type (Nucleotide or protein)
 - Parameters
   - Number of max targets
   - Expect (*e-value*)
   - Word size (length of intial exact match)
   - Output/Download format
-  - ...
+  - etc. Check [Basic BLAST arguments](#basic-blast-arguments)
+
+:::{NOTE}
+You do NOT have a program called `blast`! Only `blastn`, `blastp` etc. 
+:::
 
 ## Setup command line BLAST tool set
 
-:::{NOTE}
-You do NOT have `blast` command!  
-Commands avaliable: `blastn`, `blastp`, `blastx`, `tblastn`, `tblastx`, `makeblastdb` etc.
-:::
+Like other programs, you have to install BLAST tool set in your local computer to do BLAST locally.
+
+### Setup BLAST using conda/micromamba
+
+Check how to install conda (micromamba) [here](micromamba.md).
+
+```shell
+conda activate
+# this will activate base environment. You can also specify which environment of course.
+conda install blast -c bioconda
+```
 
 ### Setup Windows machine in bash environment (git for windows)
 
@@ -233,16 +244,6 @@ Then install BLAST, you do not need sudo right anymore.
 brew install blast
 ```
 
-### Setup BLAST using conda/micromamba
-
-Check how to install conda (micromamba) [here](micromamba.md).
-
-```shell
-conda activate
-# this will activate
-conda install blast -c bioconda
-```
-
 ## Run your first BLAST job locally
 
 ### Make a database
@@ -327,10 +328,10 @@ Download predicted proteome of *Streptomyces coelicolor* A3(2) from NCBI RefSeq 
    
    Note your database is made by generating many files with different extension, all of these files are needed for a complete blast database.
 
-:::{IMPORTANT} Which is "the database"?
-Usually when you are telling BLAST programs to do a search, you will need an argument specifying the path to your database, and you can only give **one**. But with this many files/paths, which one should we use?
+:::{IMPORTANT}
+Which is "the database"? Usually when you are telling BLAST programs to do a search, you will need an argument specifying the path to your database, and you can only give **one**. But with this many files/paths, which one should we use?
 
-! Your database is the **common** part of all generated files, which is essentially `GCF_008931305.1_ASM893130v1_protein.faa` in this example
+! Your database is the **common** part of all generated files. In this example: `GCF_008931305.1_ASM893130v1_protein.faa`.
 :::
 
 ### Make a query file
@@ -413,12 +414,14 @@ Short help `blastp -h`, full help can be obtained by `blastp -help`.
 In this example command:
 
 ```shell
-blastp -db GCF_008931305.1_ASM893130v1_protein.faa -query proteins.faa \
+blastp -db GCF_008931305.1_ASM893130v1_protein.faa \
+       -query proteins.faa \
        -outfmt 6 \
        -max_target_seqs 2 \
        -max_hsps 1 \
        -evalue 1e-12 \
        -word_size 7 \
+       -num_threads 4 \
        > proteins_blastResult.txt
 ```
 
