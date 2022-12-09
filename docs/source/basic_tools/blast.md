@@ -247,7 +247,7 @@ conda install blast -c bioconda
 
 ### Make a database
 
-Download sequences you want to target.
+Obtain sequences you want to target.
 
 1. Search an organism on NCBI, download its assembly
    - Genome / CDS / Proteins / RNA ...
@@ -259,19 +259,21 @@ Download sequences you want to target.
    - Make it up
    - Combine some of your downloaded sequences
 
-:::{NOTE}
-"Protein" and "Translated CDS" are different. "Protein" has higher certainty etc.  
+:::{TIP}
+"Protein" and "Translated CDS" are different. "Protein" has higher certainty as predicted that they can be translated into real proteins.  
 "Gene" is information, "Nucleotide" is the sequence you want.
 :::
 
 #### Example
 
-1. Go to [https://www.ncbi.nlm.nih.gov/](https://www.ncbi.nlm.nih.gov), search "Streptomyces coelicolor A3(2)" in the search box.
+Download predicted proteome of *Streptomyces coelicolor* A3(2) from NCBI RefSeq database, make a BLAST database containing all possible proteins.
+
+1. Go to [https://www.ncbi.nlm.nih.gov/](https://www.ncbi.nlm.nih.gov), search "Streptomyces coelicolor" in the search box.
 2. Scroll down, in the "Genomes" box, click "Assembly".
-3. To In the left, untick "Latest", tick "Latest RefSeq" and "Complete genome"
-4. From the search results (middle column), you need to find "Organism: Streptomyces coelicolor A3(2)" as this is the wild type model strain of this organism. Click on the accession link.
-5. Upper right corner, you can find "Download Assembly" button, click on it, choose "RefSeq" as "Source database" and choose "Protein FASTA (.faa)" as "File type". The "Estimated size" should not show "0". Then click on the "Download" button.
-6. You have downloaded a file "genome_assemblies_prot_fasta.tar", which is a "tar ball", it is simply a package of files.
+3. In the left column, untick "Latest", tick "Latest RefSeq" and "Complete genome"
+4. From the search results (middle column), you need to find "Organism: Streptomyces coelicolor A3(2)" as this is the model strain of this organism. Click on the accession link.
+5. Upper right corner, you can find "Download Assembly" button, click on it, choose "RefSeq" as "Source database" and choose "Protein FASTA (.faa)" as "File type". The "Estimated size" should **not** show "0". Then click the "Download" button.
+6. You have downloaded a file "genome_assemblies_prot_fasta.tar", which is a "tar ball". A "tar ball" is simply a package of files.
 7. Go to your terminal, navigate to the "Downloads" folder containing this file, extract the package by running `tar` command:
 
    ```shell
@@ -286,22 +288,23 @@ Download sequences you want to target.
    GCF_008931305.1_ASM893130v1_protein.faa.gz    README.txt    md5checksums.txt
    ```
 
-8. Note the file `GCF_008931305.1_ASM893130v1_protein.faa.gz`, it is your downloaded protein sequences (`.faa`) but it has an extra extension `.gz` meaning it is "**g** zipped". Before we can use it, we need to unzip:
+8. Note the file `GCF_008931305.1_ASM893130v1_protein.faa.gz`, it is your downloaded protein sequences (`.faa`) but it has an extra extension `.gz` meaning it is "**g** zipped". Before we can use it, we need to **unzip**:
 
    ```shell
    $ gzip -d GCF_008931305.1_ASM893130v1_protein.faa.gz
+   # -d tells the program to "decompress", ie. unzip.
    $ ls
    GCF_008931305.1_ASM893130v1_protein.faa    README.txt    md5checksums.txt
    ```
 
-   Now that the `.gz` extension has gone.
+   Note that the `.gz` extension has gone.
 9. Make database use `makeblastdb` command:
 
    ```shell
    $ makeblastdb -in GCF_008931305.1_ASM893130v1_protein.faa.gz -dbtype prot
 
    Building a new DB, current time: 13/09/2022 10:50:56
-   New DB name:   /Users/duc/Downloads/ncbi-genomes-2022-12-09/GCF_008931305.1_ASM893130v1_protein.faa
+   New DB name:   /Users/bob/Downloads/ncbi-genomes-2022-12-09/GCF_008931305.1_ASM893130v1_protein.faa
    New DB title:  GCF_008931305.1_ASM893130v1_protein.faa
    Sequence type: Protein
    Keep MBits: T
@@ -324,9 +327,22 @@ Download sequences you want to target.
    
    Note your database is made by generating many files with different extension, all of these files are needed for a complete blast database.
 
+:::{IMPORTANT} Which is "the database"?
+Usually when you are telling BLAST programs to do a search, you will need an argument specifying the path to your database, and you can only give **one**. But with this many files/paths, which one should we use?
+
+! Your database is the **common** part of all generated files, which is essentially `GCF_008931305.1_ASM893130v1_protein.faa` in this example
+:::
+
 ### Make a query file
 
-Use any text editor except "Word".
+Note you need to make a [FASTA file](#basic-sequence-format---fasta). Use a pure text editor (those you can not set format for your text) or switch your text editor to "plain text mode". You can copy and paste multiple sequences (with FASTA header line) into a single file. Or, if you remember `cat` command, you can generate a single query file containing multiple sequences by:
+
+```shell
+# Assuming you have the sequences of two proteins downloaded as fasta file:
+cat protein_A.faa protein_B.faa > proteins.faa
+```
+
+To follow the example above, let's make a protein file directly from command line:
 
 ```shell
 $ echo ">protein_A
@@ -340,6 +356,12 @@ DWIPRSVRQK" > proteins.faa
 ### Run a BLAST job
 
 Basic syntex and output:
+
+```shell
+blastn -query path/to/query.fasta -db path/to/database/file
+```
+
+To follow the example above:
 
 ```shell
 $ blastp -query protins.faa -db GCF_008931305.1_ASM893130v1_protein.faa
