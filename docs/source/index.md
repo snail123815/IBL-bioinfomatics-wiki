@@ -4,11 +4,13 @@ Welcome to the wikipedia page for all researchers doing or willing to do some bi
 
 ```{toctree}
 ---
-caption: BLIS
+caption: IBL Servers
 maxdepth: 2
 ---
-blis/blis_get_access.md
-blis/blis_usage.md
+IBL_servers/Intro.md
+IBL_servers/ssh access.md
+IBL_servers/Virtual environments.md
+IBL_servers/Run jobs.md
 ```
 
 ```{toctree}
@@ -25,4 +27,7 @@ caption: Basic bioinformatics tools
 maxdepth: 2
 ---
 basic_tools/blast.md
+basic_tools/micromamba.md
 ```
+
+Currently, this site is maintained by *Chao Du* and *Edder Bustos Diaz*.

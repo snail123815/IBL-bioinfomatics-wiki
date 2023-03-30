@@ -1,6 +1,15 @@
-# `micromamba` is a standalone `conda` replacement
+# `micromamba` environment management
 
 *Tutorial by C.Du*
+
+`micromamba` is a standalone `conda` replacement
+
+```{toctree}
+---
+#caption: Table of contents
+maxdepth: 3
+---
+```
 
 About what is micromamba and how to use: https://mamba.readthedocs.io/en/latest/user_guide/micromamba.html
 
