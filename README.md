@@ -2,7 +2,7 @@
 
 Address:
 
-[https://ibl-bioinfomatics-wiki.readthedocs.io/index.html](https://ibl-bioinfomatics-wiki.readthedocs.io/index.html)
+[https://ibl-bioinformatics-wiki.readthedocs.io/index.html](https://ibl-bioinfomatics-wiki.readthedocs.io/index.html)
 
 Source code of the documents are the `*.md` files located in `source/` dir.
 
