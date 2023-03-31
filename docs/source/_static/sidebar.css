@@ -1,0 +1,16 @@
+div.sphinxsidebar p.caption {
+    background-color: azure;
+    border-bottom: 0.1rem;
+    border-bottom-color: aqua;
+    border-bottom-style: dashed;
+}
+
+div.sphinxsidebar p.caption .caption-text {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 1.1rem;
+}
+
+div.sphinxsidebar li.toctree-l1 {
+    font-family: sans-serif;
+    font-size: 0.8rem;
+}
