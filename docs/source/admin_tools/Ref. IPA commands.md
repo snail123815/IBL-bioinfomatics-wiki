@@ -20,6 +20,7 @@ with your login username. Assuming you have the right to manage users.
 ### Add user
 
 To add a user, you have to have a group for this user, else IPA will create a user with GID\==UID. This may cause umask to be set to 002, which may lead to security issue.
+
 ```shell
 ipa group-show [GROUP-NAME]
 # Copy GID of this group
@@ -36,7 +37,7 @@ ipa group-add-member [GROUP-NAME-1] --users [USERNAME-1] --users [USERNAME-2]
 ipa group-add-member [GROUP-NAME-2] --users [USERNAME-1] --users [USERNAME-2]
 ```
 
-#IBLServers Each new user should belong to:
+Each new user should belong to:
 
 1. Their lab group
 
