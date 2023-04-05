@@ -30,4 +30,12 @@ basic_tools/blast.md
 basic_tools/micromamba.md
 ```
 
+```{toctree}
+---
+caption: Admin tools
+maxdepth: 2
+---
+admin_tools/Ref. IPA commands.md
+```
+
 Currently, this site is maintained by *Chao Du* and *Edder Bustos Diaz*.
