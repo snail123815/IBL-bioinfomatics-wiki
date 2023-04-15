@@ -30,4 +30,4 @@ basic_tools/blast.md
 basic_tools/micromamba.md
 ```
 
-Currently, this site is maintained by *Chao Du* and *Edder Bustos Diaz*.
+Currently, this site is maintained by *Chao Du [@snail123815](https://github.com/snail123815)* and *Edder Bustos Diaz [@EdderDaniel](https://github.com/EdderDaniel)*.

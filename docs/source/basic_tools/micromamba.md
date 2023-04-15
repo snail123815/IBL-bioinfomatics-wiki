@@ -1,6 +1,6 @@
 # `micromamba` environment management
 
-*Tutorial by C.Du*
+*By C.Du [@snail123815](https://github.com/snail123815)*
 
 ```{toctree}
 ---
