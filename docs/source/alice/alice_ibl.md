@@ -1,5 +1,7 @@
 # ALICE server from Leiden University
 
+*By C.Du [@snail123815](https://github.com/snail123815)*
+
 ```{toctree}
 ---
 #caption: Table of contents

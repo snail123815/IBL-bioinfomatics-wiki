@@ -1,6 +1,6 @@
 # Run jobs on Linux servers
 
-*by Chao DU*
+*By C.Du [@snail123815](https://github.com/snail123815)*
 
 ```{toctree}
 ---
