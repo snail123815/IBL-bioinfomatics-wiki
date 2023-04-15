@@ -1,6 +1,6 @@
 # IBL Linux Servers
 
-*By C.Du ([@snail123815](https://github.com/snail123815))*
+*By C.Du [@snail123815](https://github.com/snail123815)*
 
 ```{toctree}
 ---

@@ -1,6 +1,6 @@
 # Doing BLAST on your local computer
 
-*By C.Du ([@snail123815](https://github.com/snail123815))*
+*By C.Du [@snail123815](https://github.com/snail123815)*
 
 BLAST: Compare & identify sequences
 
