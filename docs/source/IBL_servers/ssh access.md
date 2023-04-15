@@ -1,4 +1,4 @@
-# Termianl
+# Access with ssh
 
 *By C.Du [@snail123815](https://github.com/snail123815), Edder Bustos Diaz [@EdderDaniel](https://github.com/EdderDaniel)*
 
@@ -13,9 +13,16 @@ To use our Linux servers you will need access to a command line prompt.
 - For MacOS (Apple operating system) users, the command line application  is called "Terminal", you can bring it up by typing "Terminal" in the spotlight.
 - For Linux users, open the "terminal" application (sometimes it is also called "shell").
 - For Windows users, there are several options
-  - WSL (Windows Subsystem for Linux) with the default Linux distribution. You can find more detailed instructions on how to install it [here](https://learn.microsoft.com/en-us/windows/wsl/setup/environmentl).
+  - WSL (Windows Subsystem for Linux) with the default Linux distribution. You can find more detailed instructions on how to install it [here](https://learn.microsoft.com/en-us/windows/wsl/install).
   - GitBash provide a shell environment similar to Linux systems, the settings would be the same.
   - PowerShell comes by default with Windows. The latest versions comes with "ssh". (Not recommend. It seems this is the easiest method, but you will face some problems that we cannot predict. Also, the commands to setup will be a bit different.)
+
+```{admonition} Do not copy directly
+:class: warning
+**READ COMMANDS BEFORE HITTING ENTER**
+
+In this tutorial, I do not know the IP address you are connecting to, or your own `USERNAME`, or your `ULCN`. Please do check carefully what you copied the command and change accrodingly.
+```
 
 ## Set up connection using ssh
 
@@ -41,8 +48,8 @@ You should see some output like this:
 Generating public/private ed25519 key pair.
 Enter passphrase (empty for no passphrase):
 Enter same passphrase again:
-Your identification has been saved in test
-Your public key has been saved in test.pub
+Your identification has been saved in iblservers
+Your public key has been saved in iblservers.pub
 The key fingerprint is:
 SHA256:M2238Cx5UCQgGivrRI5gtay92U3QULSQtTneghU2kO8 macbook
 The key's randomart image is:
@@ -59,7 +66,15 @@ The key's randomart image is:
 +----[SHA256]-----+
 ```
 
-Now you have created two files, which we call them a **pair** of keys. `~/.ssh/iblservers` is your private key, you do not show the content of this file to anyone; `~/.ssh/iblservers.pub` is your public key, you need to put this in your "home directory" of all servers.
+With this command, you created two files, which we call them a **pair** of keys:
+
+```sh
+~/.ssh/iblservers
+~/.ssh/iblservers.pub
+```
+
+`~/.ssh/iblservers` is your private key, you ***do not*** show the content of this file to anyone;  
+`~/.ssh/iblservers.pub` is your public key, you need to put this in your "home directory" of all servers.
 
 We recommend you to create a separate key pair to access the gateway:
 
@@ -73,7 +88,7 @@ To Gateway, assume your ULCN user name is `ULCN`:
 
 ```{code-block} shell
 ---
-emphasize-lines: 3, 8
+emphasize-lines: 3, 9
 caption: Highlighted will be the key hashes that will vary.
 ---
 # On local machine
@@ -109,6 +124,10 @@ Now enter `exit` to exit to gateway, then enter `exit` again to your local machi
 Now you are back on you local machine, take a look at your public key for "iblservers" and put it on our IBL servers:
 
 ```{code-block} shell
+---
+emphasize-lines: 3, 10
+caption: Highlighted will be the key hashes that will vary.
+---
 # On local machine
 cat ~/.ssh/iblservers.pub
 > ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIArlumJ0HK5rmN9MM93ufBX09dgxiu0Sx7HphvyrMWRH From my PC
@@ -121,11 +140,26 @@ mkdir -p ~/.ssh
 echo "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIArlumJ0HK5rmN9MM93ufBX09dgxiu0Sx7HphvyrMWRH From my PC" >> ~/.ssh/authorized_keys
 ```
 
-Note: The above operations are essentially the same which can be done by `ssh-copy-id`.
+````{note}
+The above operations are essentially what `ssh-copy-id` will do:
 
-Then exit to your local machine again, add the following lines to your `~/.ssh/config` file by:
-
+```sh
+ssh-copy-id -i ~/.ssh/sshgwLeidenuniv ULCN@sshgw.leidenuniv.nl
+ssh-copy-id -i ~/.ssh/iblservers USERNAME@999.999.999.999
 ```
+
+````
+
+### Config your local machine to use the keys
+
+On your local machin, (you need to `exit` if you just finished above commands), do the following will add correct config to your `~/.ssh/config`:  
+(The following command `echo` plus `>>` will append text to file, ***do not*** use single greater sign!)
+
+```{code-block} shell
+---
+emphasize-lines: 7, 8
+caption: Do not forget to change USERNAME and IP address
+---
 echo "Host sshgw.leidenuniv.nl
     User ULCN
     HostName sshgw.leidenuniv.nl
@@ -140,6 +174,19 @@ Host blis
     ServerAliveCountMax 10" >> .ssh/config
 ```
 
-Now you should be able to login BLIS with one command from your local machine: `ssh blis`
+```{note}
+Above command append text to `config` file, thus do not run it again when things go wrong.  
+Please open the file directly using a text editor (eg. nano, gedit on Linux, WSL; nano in gitbash; Notepad on Windows) to check and change.
+
+Note the directory `.ssh/` is usually hidden, please config your "File explorer" to show hidden files to find it.
+```
+
+### Connect
+
+Now you should be able to login BLIS with one command from your local machine:
+
+```sh
+ssh blis
+```
 
 For detailed instruction and explanation of how ssh works, please refer to How to login to [ALICE or SHARK - HPC wiki](https://pubappslu.atlassian.net/wiki/spaces/HPCWIKI/pages/37748771/How+to+login+to+ALICE+or+SHARK).

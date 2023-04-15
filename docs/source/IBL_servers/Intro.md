@@ -42,6 +42,12 @@ We give names to our servers: BLIS, FRODO, BILBO
 - NVIDIA T1000
   - 8 GiB memory
 
+## Basic knowledge of using linux shell
+
+It is easy to find information and basic training on line. If you do not know which to follow, we recommend you to follow this to start: 
+
+[The Unix Shell for novice](https://swcarpentry.github.io/shell-novice/)
+
 ## Get access
 
 You can access all three servers directly within Leiden University network. When you do not have access to the university network, you need to jump through Leiden University ssh gateway, for this, you need your ULCN account.
