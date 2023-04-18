@@ -1,13 +1,6 @@
-# Virtual environments
+# Shared environments
 
 *By C.Du [@snail123815](https://github.com/snail123815)*
-
-```{toctree}
----
-#caption: Table of contents
-maxdepth: 3
----
-```
 
 We manage our softwares using virtual environments, these environments are usually created by [conda](https://docs.conda.io/en/latest/). Now that "conda environments" become standards and many other tools can be used to create and manage the environments.
 

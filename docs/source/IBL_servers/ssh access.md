@@ -2,10 +2,9 @@
 
 *By C.Du [@snail123815](https://github.com/snail123815), Edder Bustos Diaz [@EdderDaniel](https://github.com/EdderDaniel)*
 
-```{toctree}
+```{contents}
 ---
-#caption: Table of contents
-maxdepth: 3
+depth: 3
 ---
 ```
 
@@ -190,3 +189,5 @@ ssh blis
 ```
 
 For detailed instruction and explanation of how ssh works, please refer to How to login to [ALICE or SHARK - HPC wiki](https://pubappslu.atlassian.net/wiki/spaces/HPCWIKI/pages/37748771/How+to+login+to+ALICE+or+SHARK).
+
+We use "environments" to manage softwares on all systems. On BLIS, we use `micromamba`, a `conda` replacement, for [environment management](../basic_tools/micromamba.md#blis-users).
