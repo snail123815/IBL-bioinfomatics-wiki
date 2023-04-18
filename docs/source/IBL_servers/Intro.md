@@ -2,13 +2,6 @@
 
 *By C.Du [@snail123815](https://github.com/snail123815)*
 
-```{toctree}
----
-#caption: Table of contents
-maxdepth: 3
----
-```
-
 IBL now have 3 workstation level PCs setup to server bioinformatics requirements within IBL. Every one is welcome to use and share their expertise within our community!
 
 ## Servers and specs

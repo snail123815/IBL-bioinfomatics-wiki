@@ -2,12 +2,11 @@
 
 *By C.Du [@snail123815](https://github.com/snail123815)*
 
-<!-- ```{toctree}
+```{contents}
 ---
-#caption: Table of contents
-maxdepth: 3
+depth: 3
 ---
-``` -->
+```
 
 `micromamba` is a standalone `conda` replacement. About what is micromamba and how to use: https://mamba.readthedocs.io/en/latest/user_guide/micromamba.html
 

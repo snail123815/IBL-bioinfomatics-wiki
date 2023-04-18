@@ -30,7 +30,8 @@ exclude_patterns = ['_excluded']
 html_theme = 'alabaster'
 html_static_path = ['_static']
 html_css_files = [
-    'sidebar.css'
+    'sidebar.css',
+    'tocbackref.css'
 ]
 html_sidebars = {
     '**': [

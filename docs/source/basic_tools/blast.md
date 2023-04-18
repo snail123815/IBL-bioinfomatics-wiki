@@ -2,6 +2,12 @@
 
 *By C.Du [@snail123815](https://github.com/snail123815)*
 
+```{contents}
+---
+depth: 3
+---
+```
+
 BLAST: Compare & identify sequences
 
 ## Basic sequence format - FASTA

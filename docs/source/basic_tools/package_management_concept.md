@@ -2,10 +2,9 @@
 
 *By C.Du [@snail123815](https://github.com/snail123815)*
 
-```{toctree}
+```{contents}
 ---
-#caption: Table of contents
-maxdepth: 3
+depth: 3
 ---
 ```
 
