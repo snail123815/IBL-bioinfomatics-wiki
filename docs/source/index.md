@@ -26,8 +26,9 @@ alice/alice_ibl.md
 caption: Basic bioinformatics tools
 maxdepth: 2
 ---
-basic_tools/blast.md
+basic_tools/package_management_concept.md
 basic_tools/micromamba.md
+basic_tools/blast.md
 ```
 
 ```{toctree}
