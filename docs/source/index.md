@@ -31,4 +31,12 @@ basic_tools/micromamba.md
 basic_tools/blast.md
 ```
 
+```{toctree}
+---
+caption: Admin tools
+maxdepth: 2
+---
+admin_tools/ipa_commands.md
+```
+
 Currently, this site is maintained by *Chao Du [@snail123815](https://github.com/snail123815)* and *Edder Bustos Diaz [@EdderDaniel](https://github.com/EdderDaniel)*.
