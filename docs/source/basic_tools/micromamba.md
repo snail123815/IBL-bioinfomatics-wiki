@@ -12,15 +12,15 @@ depth: 3
 
 ## BLIS users
 
-BLIS have `micromamba` in your PATH, but if you are using it for the first time, please initiate your shell using the following command and **restart your shell** after it finishes:
+BLIS have `micromamba` in your PATH, but if you are using it for the first time, you need to run the following command and **restart your shell** after it finishes:
 
-(Assuming you are using bash)
+(Assuming you are using **bash**)
 
 ```shell
-micromamba shell init -s bash -p ~/micromamba
+micromamba shell init -s bash -p ~/micromamba-base
 ```
 
-After your shell has been restarted, please run the following command to check:
+After a shell restart, run the following command to check:
 
 ```shell
 micromamba info
@@ -53,6 +53,20 @@ This will do the following two things:
 
 2. Setting `pkgs_dirs` will let it use the general cache to reduce time needed for downloading packages and save disk space.
 
+```{note}
+Commands above are also means of recovery when you encounter problems.
+```
+
+## Why choose micromamba instead of conda on BLIS?
+
+`micromamba` is a standalone reimplementation of conda package manager in C++. It provides same command line interface as conda. In addition to conda:
+
+1. Parallel downloading of repository data and package files using multi-threading
+2. `libsolv` for much faster dependency solving, a state of the art library used in the RPM package manager of Red Hat (base of our Rocky linux 8), Fedora and OpenSUSE. This is extremely apparent when encountering some large repositories such as conda-forge.
+3. Maintained actively by community, **NOT** Anaconda Inc.
+4. Not python dependent. So 1, an environment without python is by default; 2, upgrade python version inside environment is easier.
+5. `micormamba` executable relays only the one executable file itself, very easy to maintain.
+
 ## Install micromamba from scratch
 
 ref. https://mamba.readthedocs.io/en/latest/installation.html#automatic-installation
@@ -67,9 +81,9 @@ Run this command in your terminal:
 curl micro.mamba.pm/install.sh | bash
 ```
 
-Prompt will ask you if you want to “Init shell?”, Please answer “Y” for yes. After this is done, please restart your shell.
+Prompt will ask you if you want to “Init shell?”, Please answer “Y” for yes, then restart your shell.
 
-To check if micromamba has been successfully installed, please check using this command:
+After a shell restart, run the following command to check:
 
 ```shell
 micromamba info
