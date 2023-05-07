@@ -6,7 +6,7 @@ IBL now have 3 workstation level PCs setup to server bioinformatics requirements
 
 ## Servers and specs
 
-We give names to our servers: BLIS, FRODO, BILBO
+We give names to our servers: BLIS, FRODO, BILBO. All of them are powered by [Rocky linux 8](https://rockylinux.org/about), a production-ready downstream version of Red Hat Enterprise Linux.
 
 ### BLIS
 
@@ -16,6 +16,8 @@ We give names to our servers: BLIS, FRODO, BILBO
 - 256 GiB memory
 - NVIDIA Quadro RTX 4000
   - 8 GiB memory
+- 2 TB SSD
+- 7 TB HDD
 
 ### FRODO
 

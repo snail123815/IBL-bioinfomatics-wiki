@@ -160,6 +160,8 @@ Now you should be able to login BLIS with one command from your local machine:
 ssh blis
 ```
 
+This command will use the configuration you added to your `.ssh/config` file for the `Host blis` section to connect to the BLIS server. It will connect with your provided `USERNAME` and to the specific host, which in our case is provided as an IP address. The command is `ssh blis`.
+
 For detailed instruction and explanation of how ssh works, please refer to How to login to [ALICE or SHARK - HPC wiki](https://pubappslu.atlassian.net/wiki/spaces/HPCWIKI/pages/37748771/How+to+login+to+ALICE+or+SHARK).
 
 We use "environments" to manage softwares on all systems. On BLIS, we use `micromamba`, a `conda` replacement, for [environment management](../basic_tools/micromamba.md#blis-users).

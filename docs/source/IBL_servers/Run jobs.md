@@ -1,49 +1,79 @@
-# Run jobs on Linux servers
+# Run programs
 
 *By C.Du [@snail123815](https://github.com/snail123815)*
 
-## Schedule your jobs
+## Check & install software
 
-1. Check pinned messages "jobs-for-blis-frodo-bilbo" channel in our Slack group.
-2. Log in the system, use `htop` or `top` to check if any processes are running heavily. Notify in the channel if there is any anomaly.
-3. Run your job. If it will take long, run it in a `screen` session, check its status.
-4. Tell everyone else in the "jobs-for-blis-frodo-bilbo" channel using the this format: "{Job type} is using {number} cores, (approximately, optional) {number} ram, till ~(approximately) {time}."  
-  eg. "phylophlan is using 8 cores, 100 GB ram, till ~20 Nov 9:00."
-
-```{admonition} Rule of thumb
-- For any job, leave at least 2 cores free.
-- For short jobs, use as many cores as possible.
-- For long jobs, use maximum half of the cores. If more cores are needed, notify everyone in advance.
-```
+To manage software used by different users on BLIS, we use virtual environments located at /vol/local/conda_envs. You can check if the environment for the software you want to use already exists at this location. If it does not exist, you will need to create one and install the software yourself. For detailed instructions on how to create virtual environments and install software, please refer to the [Virtual environments](./Virtual%20environments.md) guide.
 
 ## File transfer
 
-Assume you have already setup ssh connection to ALICE (`hpc1`) and BLIS (`blis`).
+If you're planning to work with your own dataset on the servers, you'll need to transfer it first. To do this, you need to have already set up an SSH connection to ALICE (`hpc1`) and BLIS (`blis`).
 
 ### scp
 
-SCP for secure copy, or ssh cp, or safe cp...
+SCP for <u>s</u>ecure <u>c</u>o<u>p</u>y, or ssh cp, or safe cp...
 
-When you have few files to copy, this is a good tool. But if you have a directory to transfer, then rsync is much better.
+When you have few files to copy, this is a good tool. It **cannot** resume transfer after transfer failure.
+
+The syntax for `scp` is
 
 ```shell
 scp [OPTIONS] [[user@]src_host:]file1 [[user@]dest_host:]file2
+```
+
+Same as command `ssh`, since you have already a config with user name and IP address for `Host blis` and `Host hpc1`, then the `[[user@]dest_host:]` part can be replaced with `blis:` or `hpc1:`.
+
+```shell
 # A file
-scp path/to/file blis:/vol/local/username
-# A dir
-scp -r path/to/dir hpc1:data/
+scp path/to/file blis:/vol/local/username/
+# Multiple files
+scp path/to/fileA path/to/fileB blis:/vol/local/username/
+# A directory, -r for recursive
+scp -r path/to/dir blis:/vol/data/username
 ```
 
 ### rsync
 
+`rsync` is a more reliable tool for copying large datasets. It can continue the transfer from where it left off in case of interruption.
+
+The syntax for `rsync` is almost the same as `scp`:
+
 ```shell
 rsync [OPTION...] SRC... [USER@]HOST:DEST
-# A dir
-rsync -aP path/to/dir hpc1:data/
+```
+
+```shell
+# Copy a directory to your own folder in the shared storage on BLIS
+rsync -aP path/to/dir blis:/vol/data/username/
+```
+
+`-a` means archiving the directory, it will copy everything associated with the file, including its creation time, permissions etc. It implies `-rlptgoD`.  
+`-P` to show progress.
+
+## Run your jobs
+
+Please follow these steps:
+
+1. Check the "jobs-for-blis-frodo-bilbo" channel in our Slack group for pinned messages.
+2. Log in to the system and use htop or top to check for heavily running processes. Notify the channel if you see any anomalies.
+3. Run your job. If it will take a long time, run it in a `screen` session and check its status.
+4. Inform everyone else in the "jobs-for-blis-frodo-bilbo" channel using this format:  
+   "{Job type} on {SERVER} is using {number} cores, (approximately, optional) {number} ram, until ~(approximately) {time}."  
+   For example, "phylophlan on BLIS is using 8 cores, 100 GB ram, until ~20 Nov 9:00." Pin this message.
+5. Once your job is done, edit the message to include a big "DONE" at the beginning and unpin it.
+
+```{admonition} Rule of thumb
+- For any job, leave at least 2 cores free.
+- For short jobs, use as many cores as possible.
+- For long jobs, use maximum half of the avaliable cores. If more cores are needed, notify everyone in advance.  
+  For example, "PLANNING phylophlan on BLIS, is using 18 cores, 160 GB ram, from 19 Nov 20:00 till ~20 Nov 9:00."  
 ```
 
 ## How to run long jobs using `screen`
 
-When you want to run a long job, longer than your ssh connection, then you can use `screen`. When you execute `screen`, a new bash will open, it is actually another shell that runs through the program screen. You can do anything here. When it starts doing things, press **ctrl + a** then **d** to detach from the shell. The program you run inside screen shell will still be running in the background. You can check the status by `htop` or `top`. Now it is safe to exit ssh connection. When you want to come back to your job, check the output etc., you can execute `screen -r`, this operation is called "attaching".
+If you need to run a long job that exceeds the duration of your SSH connection, you can use `screen`. This program creates a new Bash shell that runs within the `screen` program, allowing you to run commands even if your SSH connection is interrupted. To use `screen`, simply execute the command, and a new shell will open. From here, you can execute commands as usual. To detach from the shell and leave the program running, press **Ctrl + a**, release the buttones, then press **d**. You can check the status of the program using `htop` or `top`. Once detached, you can safely exit the SSH connection. To come back to your running job, check its output, etc., you can execute `screen -r` to attach to the shell that have your running program.
 
-This also works on ALICE, but please do not use this for super long jobs, they should only run in slurm queue.
+When multiple `screen` is needed and you find it hard to track which is doing which job, you can use `screen -S [session name]` command to give each screen a name. Then use `screen -r [session name]` to resume to that session.
+
+`screen` might also works on ALICE, but please do not use `screen` for super long jobs on ALICE. Long jobs should only run in a slurm queue.
