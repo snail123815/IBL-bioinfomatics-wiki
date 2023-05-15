@@ -25,9 +25,9 @@ Please note that in this tutorial, we do not know the IP address you are connect
 
 ## Set up connection using ssh
 
-To access our server from outside Leiden University's network, you need to tunnel through a gateway called sshgw.leidenuniv.nl. Once you are able to log in to the gateway using your ULCN username and password, you can proceed with the setup.
+To access our server from outside Leiden University's [Research Network](./Intro.md#what-is-research-network), you need to tunnel through a gateway called sshgw.leidenuniv.nl. Once you are able to log in to the gateway using your ULCN username and password, you can proceed with the setup.
 
-It's perfectly safe to access the servers through the gateway, even if you're already within Leiden University's network. For the purposes of this tutorial, we'll assume that you'll always use the gateway.
+It's perfectly safe to access the servers through the gateway, even if you're already within Research Network. For the purposes of this tutorial, we'll assume that you'll always use the gateway.
 
 Once you've completed the setup, you can access our servers (e.g., BLIS) from your computer with a single command: `ssh blis`.
 
