@@ -6,14 +6,13 @@
 	"image": "mcr.microsoft.com/devcontainers/python:0-3.11",
 	// Features to add to the dev container. More info: https://containers.dev/features.
 	"features": {
-		"ghcr.io/devcontainers-contrib/features/mypy:2": {
-			"version": "latest"
-		}
+		"ghcr.io/devcontainers-contrib/features/npm-package:1": {}
 	},
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],
 	// Use 'postCreateCommand' to run commands after the container is created.
-	"postCreateCommand": "pip install --user -r docs/requirements.txt"
+	"postCreateCommand": "pip install --user -r docs/requirements.txt && npm i -g http-server"
+	
 	// Configure tool-specific properties.
 	// "customizations": {},
 	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
