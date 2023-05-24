@@ -9,6 +9,7 @@ depth: 3
 ```
 
 To use our Linux servers, you'll need access to a command line prompt. Here's how to get started on different operating systems:
+
 - For MacOS (Apple operating system) users, open the "Terminal" application by typing "Terminal" in the spotlight.
 - For Linux users, open the "Terminal" application (sometimes it is also called "shell").
 - For Windows users, there are several options:
@@ -23,13 +24,13 @@ To use our Linux servers, you'll need access to a command line prompt. Here's ho
 Please note that in this tutorial, we do not know the IP address you are connecting to, your `USERNAME`, or your `ULCN`. Please carefully check the commands you copy and adjust them accordingly.
 ```
 
-## Set up connection using ssh
+## Set up connection using ssh through SSH gateway
 
 To access our server from outside Leiden University's [Research Network](./Intro.md#what-is-research-network), you need to tunnel through a gateway called sshgw.leidenuniv.nl. Once you are able to log in to the gateway using your ULCN username and password, you can proceed with the setup.
 
 It's perfectly safe to access the servers through the gateway, even if you're already within Research Network. For the purposes of this tutorial, we'll assume that you'll always use the gateway.
 
-Once you've completed the setup, you can access our servers (e.g., BLIS) from your computer with a single command: `ssh blis`.
+Once you've completed the setup, you can access our servers (e.g., BLIS) from your computer with a single command: `ssh blis`, `ssh frodo`, or `ssh bilbo`.
 
 ### Create ssh key pair
 
@@ -44,7 +45,7 @@ When you execute this command, you'll be prompted to enter a "passphrase". If yo
 
 You should see some output looks like this:
 
-```
+```text
 Generating public/private ed25519 key pair.
 Enter passphrase (empty for no passphrase):
 Enter same passphrase again:
@@ -76,7 +77,7 @@ By running this command, you have actually created a pair of files that we refer
 The file `~/.ssh/iblservers` is your private key. Be sure not to share its contents with anyone;  
 The `~/.ssh/iblservers.pub` file is your public key, which you will add to the `~/.ssh/authorized_keys` file of all servers using the `ssh-copy-id` command.
 
-Although you can use the same key pair to access all servers, it's safer to create a separate key pair for accessing the gateway. We highly recommend following this practice, and the rest of this tutorial will assume that you have created a separate key pair for accessing the gateway:
+You can use the same key pair to access all servers. However, it's safer to create a separate key pair for accessing the gateway. We highly recommend following this practice, and the rest of this tutorial will assume that you have created a separate key pair for accessing the gateway:
 
 ```shell
 ssh-keygen -t ed25519 -C "From my PC" -f ~/.ssh/sshgwLeidenuniv
@@ -88,10 +89,11 @@ You need to add the correct configuration to your `~/.ssh/config` file on your l
 
 ```{code-block} shell
 ---
-emphasize-lines: 2, 7, 8
+emphasize-lines: 3, 7, 8, 9, 16, 17, 18, 25, 26, 27
 caption: Do not forget to change USERNAME and IP address
 ---
-echo "Host sshgw.leidenuniv.nl
+echo "
+Host sshgw.leidenuniv.nl
     User ULCN
     HostName sshgw.leidenuniv.nl
     IdentityFile ~/.ssh/sshgwLeidenuniv
@@ -99,10 +101,30 @@ echo "Host sshgw.leidenuniv.nl
 Host blis
     User USERNAME
     HostName 999.999.999.999
+    # Use BLIS IP address in the above line
     ProxyCommand ssh -A sshgw.leidenuniv.nl -p 22 -q -W %h:%p
     IdentityFile ~/.ssh/iblservers
     ServerAliveInterval 60
-    ServerAliveCountMax 10" >> .ssh/config
+    ServerAliveCountMax 10
+
+Host bilbo
+    User USERNAME
+    HostName 999.999.999.999
+    # Use BILBO IP address
+    ProxyCommand ssh -A sshgw.leidenuniv.nl -p 22 -q -W %h:%p
+    IdentityFile ~/.ssh/iblservers
+    ServerAliveInterval 60
+    ServerAliveCountMax 10
+
+Host frodo
+    User USERNAME
+    HostName 999.999.999.999
+    # Use FRODO IP address
+    ProxyCommand ssh -A sshgw.leidenuniv.nl -p 22 -q -W %h:%p
+    IdentityFile ~/.ssh/iblservers
+    ServerAliveInterval 60
+    ServerAliveCountMax 10
+" >> .ssh/config
 ```
 
 ```{note}
@@ -126,7 +148,7 @@ ssh-copy-id -i ~/.ssh/sshgwLeidenuniv.pub ULCN@sshgw.leidenuniv.nl
 
 Remember to replace `ULCN` with your actual ULCN username in the command. After running the command, you will be prompted to enter your ULCN password. When succeeded, you should see output containing:
 
-```
+```text
 ...
 Number of key(s) added: 1
 
@@ -138,11 +160,13 @@ Do not try it just yet (or if you tried, remember to `exit` back to your local m
 
 ```shell
 ssh-copy-id -i .ssh/iblservers.pub -o ProxyJump=ULCN@sshgw.leidenuniv.nl USERNAME@999.999.999.999
+ssh-copy-id -i .ssh/iblservers.pub -o ProxyJump=ULCN@sshgw.leidenuniv.nl USERNAME@999.999.999.999 #BILBO
+ssh-copy-id -i .ssh/iblservers.pub -o ProxyJump=ULCN@sshgw.leidenuniv.nl USERNAME@999.999.999.999 #FRODO
 ```
 
 Remember to replace `ULCN` with your ULCN username, `USERNAME` with the username provided in the email, and `999.999.999.999` with the actual IP address provided in the email. Pay attention to which password it asks for. After your password is accepted, the command should finish with output containing:
 
-```
+```text
 ...
 Number of key(s) added: 1
 
@@ -165,3 +189,51 @@ This command will use the configuration you added to your `.ssh/config` file for
 For detailed instruction and explanation of how ssh works, please refer to How to login to [ALICE or SHARK - HPC wiki](https://pubappslu.atlassian.net/wiki/spaces/HPCWIKI/pages/37748771/How+to+login+to+ALICE+or+SHARK).
 
 We use "environments" to manage softwares on all systems. On BLIS, we use `micromamba`, a `conda` replacement, for [environment management](../basic_tools/micromamba.md#blis-users).
+
+## Connect directly from inside Research Network
+
+If you have a desktop computer that is connected to a Ethernet socket on the wall, you don't need to jump from the University's SSH-gateway. You can omit key generation steps for `sshgwLeidenuniv`. Only create `iblservers`, `iblservers.pub` key pair and copy `iblservers.pub` directly to our server. The `config` file in `~/.ssh/` directory can also be simplified.
+
+Following are full steps (work in GitBash for Windows machines), please check corresponding section in [Set up connection using ssh through SSH gateway](#set-up-connection-using-ssh-through-ssh-gateway):
+
+```shell
+# Create ssh key pair
+mkdir -p ~/.ssh
+ssh-keygen -t ed25519 -C "From my PC" -f ~/.ssh/iblservers
+
+# Confige your local machine to use the keys
+echo "
+Host blis
+    User USERNAME
+    HostName 999.999.999.999
+    # Use BLIS IP address in the above line
+    IdentityFile ~/.ssh/iblservers
+    ServerAliveInterval 60
+    ServerAliveCountMax 10
+
+Host bilbo
+    User USERNAME
+    HostName 999.999.999.999
+    # Use BILBO IP address
+    IdentityFile ~/.ssh/iblservers
+    ServerAliveInterval 60
+    ServerAliveCountMax 10
+
+Host frodo
+    User USERNAME
+    HostName 999.999.999.999
+    # Use FRODO IP address
+    IdentityFile ~/.ssh/iblservers
+    ServerAliveInterval 60
+    ServerAliveCountMax 10
+" >> .ssh/config
+
+# Add keys to the server
+# You can omit the servers you don't use
+ssh-copy-id -i .ssh/iblservers.pub USERNAME@999.999.999.999 #BLIS
+ssh-copy-id -i .ssh/iblservers.pub USERNAME@999.999.999.999 #BILBO
+ssh-copy-id -i .ssh/iblservers.pub USERNAME@999.999.999.999 #FRODO
+
+# Connect
+ssh blis
+```
