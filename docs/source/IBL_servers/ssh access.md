@@ -74,6 +74,8 @@ By running this command, you have actually created a pair of files that we refer
 ~/.ssh/iblservers.pub
 ```
 
+![ssh key pair illustration](../_static/images/ssh_keygen_drawing.svg)
+
 The file `~/.ssh/iblservers` is your private key. Be sure not to share its contents with anyone;  
 The `~/.ssh/iblservers.pub` file is your public key, which you will add to the `~/.ssh/authorized_keys` file of all servers using the `ssh-copy-id` command.
 
@@ -83,59 +85,9 @@ You can use the same key pair to access all servers. However, it's safer to crea
 ssh-keygen -t ed25519 -C "From my PC" -f ~/.ssh/sshgwLeidenuniv
 ```
 
-### Config your local machine to use the keys
-
-You need to add the correct configuration to your `~/.ssh/config` file on your local machine. Follow the steps below. (Note that the command below uses >> to append text to the file, even if it does not exist; if you already have the config file, do not use a single > as it will overwrite the existing file.)
-
-```{code-block} shell
----
-emphasize-lines: 3, 7, 8, 9, 16, 17, 18, 25, 26, 27
-caption: Do not forget to change USERNAME and IP address
----
-echo "
-Host sshgw.leidenuniv.nl
-    User ULCN
-    HostName sshgw.leidenuniv.nl
-    IdentityFile ~/.ssh/sshgwLeidenuniv
-
-Host blis
-    User USERNAME
-    HostName 999.999.999.999
-    # Use BLIS IP address in the above line
-    ProxyCommand ssh -A sshgw.leidenuniv.nl -p 22 -q -W %h:%p
-    IdentityFile ~/.ssh/iblservers
-    ServerAliveInterval 60
-    ServerAliveCountMax 10
-
-Host bilbo
-    User USERNAME
-    HostName 999.999.999.999
-    # Use BILBO IP address
-    ProxyCommand ssh -A sshgw.leidenuniv.nl -p 22 -q -W %h:%p
-    IdentityFile ~/.ssh/iblservers
-    ServerAliveInterval 60
-    ServerAliveCountMax 10
-
-Host frodo
-    User USERNAME
-    HostName 999.999.999.999
-    # Use FRODO IP address
-    ProxyCommand ssh -A sshgw.leidenuniv.nl -p 22 -q -W %h:%p
-    IdentityFile ~/.ssh/iblservers
-    ServerAliveInterval 60
-    ServerAliveCountMax 10
-" >> .ssh/config
-```
-
-```{note}
-Please note that the command above appends text to the config file. **Do not run it again** if you need to make changes to the configuration. Instead, open the file directly using a text editor such as nano or gedit on Linux or WSL, nano in GitBash, or Notepad on Windows.
-
-It's important to note that the .ssh/ directory is usually hidden. To find it, configure your file explorer to show hidden files.
-```
-
 ### Add keys to the servers
 
-You have successfully generated and stored the keys on your local computer, and configured your computer to use these keys when connecting to the gateway and the BLIS server. However, you also need to inform the servers that these keys belong to you and that you should be allowed to use them when logging in. This process involves entering passwords, so it's important to be extremely careful with the passwords you use.
+ However, you also need to inform the servers that these keys belong to you and that you should be allowed to use them when logging in. This process involves entering passwords, so it's important to be extremely careful with the passwords you use.
 
 - For the gateway connection, enter your ULCN password when the prompt says `ULCN@sshgw.leidenuniv.nl's` password:.
 - For the BLIS server connection, enter the password you received via email when the prompt says `USERNAME@999.999.999.999's password:`. You will be prompted with `Password expired. Change your password now.`, so you will need to enter your old password again, followed by your new password twice. Be sure to remember your new password! Once succeeded, your old password is not valid anymore.
@@ -198,9 +150,65 @@ and check to make sure that only the key(s) you wanted were added.
 
 You can try it by following the instructions, but now you should be able to connect from your local machine using a easier command.
 
+### Config your local machine to use the keys
+
+After above steps, you still cannot access the gateway and our servers with the ssh keys, ie, you still need to use your password every time you connect. To make our efforts yield valuable results, ou need to add the correct configuration to your `~/.ssh/config` file on your local machine. This is the configuration file for `ssh` program to know which key to use when connecting to a specific server.
+
+You must have noticed that in previous steps, we have generated two key pairs for "gateway" and "IBL servers" (BLIS, FRODO, BILBO). This is because we have the following infrastructure setup as indicated in the section [Set up connection using ssh through SSH gateway](#set-up-connection-using-ssh-through-ssh-gateway).
+
+![IBL server infrastructure](../_static/images/ssh_jump_drawing.svg)
+
+Follow the steps below. (Note that the command below uses >> to append text to the file, even if it does not exist; if you already have the config file, do not use a single > as it will overwrite the existing file.)
+
+```{code-block} shell
+---
+emphasize-lines: 3, 7, 8, 9, 16, 17, 18, 25, 26, 27
+caption: Do not forget to change USERNAME and IP address
+---
+echo "
+Host sshgw.leidenuniv.nl
+    User ULCN
+    HostName sshgw.leidenuniv.nl
+    IdentityFile ~/.ssh/sshgwLeidenuniv
+
+Host blis
+    User USERNAME
+    HostName 999.999.999.999
+    # Use BLIS IP address in the above line
+    ProxyCommand ssh -A sshgw.leidenuniv.nl -p 22 -q -W %h:%p
+    IdentityFile ~/.ssh/iblservers
+    ServerAliveInterval 60
+    ServerAliveCountMax 10
+
+Host bilbo
+    User USERNAME
+    HostName 999.999.999.999
+    # Use BILBO IP address
+    ProxyCommand ssh -A sshgw.leidenuniv.nl -p 22 -q -W %h:%p
+    IdentityFile ~/.ssh/iblservers
+    ServerAliveInterval 60
+    ServerAliveCountMax 10
+
+Host frodo
+    User USERNAME
+    HostName 999.999.999.999
+    # Use FRODO IP address
+    ProxyCommand ssh -A sshgw.leidenuniv.nl -p 22 -q -W %h:%p
+    IdentityFile ~/.ssh/iblservers
+    ServerAliveInterval 60
+    ServerAliveCountMax 10
+" >> .ssh/config
+```
+
+```{note}
+Please note that the command above appends text to the config file. **Do not run it again** if you need to make changes to the configuration. Instead, open the file directly using a text editor such as nano or gedit on Linux or WSL, nano in GitBash, or Notepad on Windows.
+
+It's important to note that the .ssh/ directory is usually hidden. To find it, configure your file explorer to show hidden files.
+```
+
 ### Connect
 
-Now you should be able to login BLIS with one command from your local machine:
+You have successfully generated and stored the keys on your local computer, and configured your computer to use these keys when connecting to the gateway and the BLIS server. Now you should be able to login BLIS with one command from your local machine:
 
 ```sh
 ssh blis
