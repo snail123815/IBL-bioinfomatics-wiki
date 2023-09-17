@@ -140,7 +140,29 @@ You have successfully generated and stored the keys on your local computer, and 
 - For the gateway connection, enter your ULCN password when the prompt says `ULCN@sshgw.leidenuniv.nl's` password:.
 - For the BLIS server connection, enter the password you received via email when the prompt says `USERNAME@999.999.999.999's password:`. You will be prompted with `Password expired. Change your password now.`, so you will need to enter your old password again, followed by your new password twice. Be sure to remember your new password! Once succeeded, your old password is not valid anymore.
 
-The command to add the `sshgwLeidenuniv` key pair to the Gateway and upload the corresponding public key file is:
+#### On Windows using PowerShell
+
+As the `ssh-copy-id` program is not available in Windows PowerShell, an alternative method is required to configure the server to recognize the generated keys.
+
+Compose the following one line command with your ULCN username:
+
+```PowerShell
+type $env:USERPROFILE\.ssh\sshgwLeidenuniv.pub | ssh ULCN@sshgw.leidenuniv.nl "cat >> .ssh/authorized_keys"
+```
+
+Type your **ULCN** password to complete the operation. Now you have copied the corresponding public key `sshgwLeidenuniv.pub` to our university Gateway server. **Note** here in PowerShell, `$env:USERPROFILE` is a replacement of `~` for the "HOME" directory.
+
+Now copy the corresponding public key `iblservers.pub` to our IBL servers using the following 3 commands. Do change the IP address 999.999.999.999 to the IP of BLIS, FRODO, BILBO:
+
+```PowerShell
+type $env:USERPROFILE\.ssh\iblservers.pub | ssh USERNAME@999.999.999.999 "mkdir -p .ssh && cat >> .ssh/authorized_keys"
+type $env:USERPROFILE\.ssh\iblservers.pub | ssh USERNAME@999.999.999.999 "mkdir -p .ssh && cat >> .ssh/authorized_keys"
+type $env:USERPROFILE\.ssh\iblservers.pub | ssh USERNAME@999.999.999.999 "mkdir -p .ssh && cat >> .ssh/authorized_keys"
+```
+
+#### On Mac / Linux or on Windows using GitBash / Cygwin
+
+`ssh-copy-id` program exists on these systems. The command to add the `sshgwLeidenuniv` key pair to the Gateway and upload the corresponding public key file is:
 
 ```shell
 ssh-copy-id -i ~/.ssh/sshgwLeidenuniv.pub ULCN@sshgw.leidenuniv.nl
@@ -159,9 +181,9 @@ and check to make sure that only the key(s) you wanted were added.
 Do not try it just yet (or if you tried, remember to `exit` back to your local machine). Now, from your local machine, add the other key to BLIS.
 
 ```shell
-ssh-copy-id -i .ssh/iblservers.pub -o ProxyJump=ULCN@sshgw.leidenuniv.nl USERNAME@999.999.999.999
-ssh-copy-id -i .ssh/iblservers.pub -o ProxyJump=ULCN@sshgw.leidenuniv.nl USERNAME@999.999.999.999 #BILBO
-ssh-copy-id -i .ssh/iblservers.pub -o ProxyJump=ULCN@sshgw.leidenuniv.nl USERNAME@999.999.999.999 #FRODO
+ssh-copy-id -i .ssh/iblservers.pub -o ProxyJump=ULCN@sshgw.leidenuniv.nl USERNAME@999.999.999.999 # BLIS
+ssh-copy-id -i .ssh/iblservers.pub -o ProxyJump=ULCN@sshgw.leidenuniv.nl USERNAME@999.999.999.999 # BILBO
+ssh-copy-id -i .ssh/iblservers.pub -o ProxyJump=ULCN@sshgw.leidenuniv.nl USERNAME@999.999.999.999 # FRODO
 ```
 
 Remember to replace `ULCN` with your ULCN username, `USERNAME` with the username provided in the email, and `999.999.999.999` with the actual IP address provided in the email. Pay attention to which password it asks for. After your password is accepted, the command should finish with output containing:
