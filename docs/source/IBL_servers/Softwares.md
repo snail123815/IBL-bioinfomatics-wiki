@@ -15,19 +15,100 @@ $ groups
 sgr condablis
 ```
 
+## Run a program
+
+Before working with virtual environments, it is highly recommanded to setup a `~/.mambarc` file follow [setting up config file](#setting-up-config-file) down below.
+
+Since all softwares are installed in an environment, you have to activate it first. For example, to use a local version of AntiSMASH:
+
+```sh
+# 0. Make sure you have your shell initiated with micromamba (skip if done before)
+[user@blis ~]$ micromamba shell init -s bash -p ~/micromamba-base
+# 1. Activate environment
+(base) [user@blis ~]$ micromamba activate /vol/local/conda_envs/antismash
+# 2. Check if antismash is avaliable
+(/vol/local/conda_envs/antismash) [user@blis ~]$ antismash --help
+
+########### antiSMASH 6.1.1 #############
+
+usage: antismash [-h] [options ..] sequence
+
+
+arguments:
+  SEQUENCE  GenBank/EMBL/FASTA file(s) containing DNA.
+
+--------
+Options
+--------
+...
+```
+
+## Install a program
+
+Before working with virtual environments, it is highly recommanded to setup a `~/.mambarc` file follow [setting up config file](#setting-up-config-file) down below.
+
+Install a program using `sudo` by many users will lead to disaster. Thus all programs needs to be in a contained environment. Compatible programs that might be used by a pipeline can be installed together in one environment.
+
+Create an environment to host the software or a pipe line you want to run. Then you have all control over the environment you created.
+
+```sh
+# 0. Make sure you have your shell initiated with micromamba (skip if done before)
+[user@blis ~]$ micromamba shell init -s bash -p ~/micromamba-base
+# 1. Create environment called multi-omics and activate it
+(base) [user@blis ~]$ micromamba create -p /vol/local/conda_envs/multi-omics
+(base) [user@blis ~]$ micromamba activate /vol/local/conda_envs/multi-omics
+# 2. Install software, eg. python
+(/vol/local/conda_envs/multi-omics) [user@blis ~]$ micromamba install -c conda-forge python
+```
+
+### Do not follow tutorial with yml file
+
+Many times you will find a tutorial to setup a conda environemnt by `conda env create -f minimotif.yml minimotif`. Please **DO NOT** follow this by simply replacing `conda env` with `micromamba`.
+
+In these cases, the `.yml` file usually looks like:
+
+```YAML
+name: MiniMotif
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - _libgcc_mutex=0.1
+  - _openmp_mutex=4.5
+  - alsa-lib=1.2.8
+  - attr=2.5.1
+  - biopython=1.81
+  - ...
+```
+
+Please remove the `name:` line and save the file. (The line is telling conda or micromamba to install the environment with `-n` switch, it is not compatible with `-p` switch.)
+
+Then:
+
+```sh
+# 1. Create environment using -p
+(base) [user@blis ~]$ micromamba create -p /vol/local/conda_envs/MiniMotif
+(base) [user@blis ~]$ micromamba activate /vol/local/conda_envs/MiniMotif
+# 2. Install all dependencies using the .yml file
+(/vol/local/conda_envs/MiniMotif) [user@blis ~]$ micromamba install -f minimotif.yml
+```
+
+Now it should do the job.
+
 ## Location of shared environments
 
 All our shared environments are stored in `/vol/local/conda_envs/`, and all cache files are stored in `/vol/loca/.conda_cache/`.
 
 Please follow the turtoral below to config your `.condarc`. All cache files will then be stored in a shared location: `/vol/local/.conda_cache` to save disk space.
 
-### Config file `.condarc`
+### Setting up config file
 
 Conda uses a config file located in your home folder: `~/.condarc` to store your specific configurations. Well `micromamba` *not only* check `~/.condarc` file, but also uses `~/.mambarc`, one of them is enough.
 
 The config file has few convenient options. On BLIS, please put these contents in the config file:
 
-```yml
+```YAML
 envs_dirs:
   - /vol/local/conda_envs
 pkgs_dirs:
@@ -39,7 +120,7 @@ pkgs_dirs:
 
 You can also add:
 
-```yml
+```YAML
 channels:
   - bioconda
   - conda-forge
