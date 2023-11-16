@@ -124,9 +124,9 @@ Now it should do the job.
 
 ## Location of shared environments
 
-All our shared environments are stored in `/vol/local/conda_envs/`, and all cache files are stored in `/vol/loca/.conda_cache/`.
+All our shared environments are stored in `/vol/local/conda_envs/`, and all cache files are stored in `/vol/loca/.conda_cache/USERNAME`.
 
-Please follow the turtoral below to config your `.condarc`. All cache files will then be stored in a shared location: `/vol/local/.conda_cache` to save disk space.
+Please follow the turtoral below to config your `.condarc`. All cache files will then be stored in a shared location: `/vol/local/.conda_cache/USERNAME` for easier cleanup.
 
 ### Setting up config file
 
