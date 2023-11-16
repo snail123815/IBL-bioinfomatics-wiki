@@ -4,7 +4,7 @@
 
 ## Check & install software
 
-To manage software used by different users on BLIS, we use virtual environments located at /vol/local/conda_envs. You can check if the environment for the software you want to use already exists at this location. If it does not exist, you will need to create one and install the software yourself. For detailed instructions on how to create virtual environments and install software, please refer to the [Virtual environments](./Virtual%20environments.md) guide.
+To manage software used by different users on BLIS, we use virtual environments located at /vol/local/conda_envs. You can check if the environment for the software you want to use already exists at this location. If it does not exist, you will need to create one and install the software yourself. For detailed instructions on how to create virtual environments and install software, please refer to the [Softwares](./Softwares.md) guide.
 
 ## File transfer
 

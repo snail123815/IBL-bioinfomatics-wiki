@@ -1,11 +1,12 @@
-# Shared environments
+# Softwares
 
 *By C.Du [@snail123815](https://github.com/snail123815)*
 
-We manage our software using [conda](https://docs.conda.io/en/latest/) virtual environments, which have become a standard tool in the field and many other tools are compatible with its standard. To avoid confusion, we will use the term "environment" to refer specifically to conda-compatible virtual environments. By using environments, we can easily manage software dependencies and avoid conflicts between different software versions. 
+(Avaliable softwares can be found in directory `/vol/local/conda_envs/`, use by [activating]() corresponding environment)
 
-On BLIS, we use **[micromamba](https://mamba.readthedocs.io/en/latest/user_guide/micromamba.html)**, a lightweight and efficient alternative to conda, to manage these environments.
-A shared directory dedicated to storing, sharing, and modifying environments is created on BLIS. By default, all users on BLIS should be in a premission group called "condablis". This group grant users access to our shared environments.
+We manage our softwares using [conda](https://docs.conda.io/en/latest/) virtual environments, which have become a standard tool in the field and many other tools are compatible with its standard. To avoid confusion, we will use the term "environment" to refer specifically to conda-compatible virtual environments. By using environments, we can easily manage software dependencies and avoid conflicts between different software versions.
+
+On BLIS, we use a tool called **[micromamba](https://mamba.readthedocs.io/en/latest/user_guide/micromamba.html)**, a lightweight and efficient alternative to conda, to manage these environments. A shared directory dedicated to storing, sharing, and modifying environments is created on BLIS. By default, all users on BLIS should be in a premission group called "condablis". This group grant users access to our shared environments.
 
 Please make sure you are in "condablis" group by running `groups` command. You should see "condablis" in the output of this command. If not, please contact server admin.
 
