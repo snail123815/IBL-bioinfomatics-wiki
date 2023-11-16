@@ -104,7 +104,7 @@ Please follow the turtoral below to config your `.condarc`. All cache files will
 
 ### Setting up config file
 
-Conda uses a config file located in your home folder: `~/.condarc` to store your specific configurations. Well `micromamba` *not only* check `~/.condarc` file, but also uses `~/.mambarc`, one of them is enough.
+The program micromamba uses a config file located in your home folder: `~/.mambarc` to store your specific configurations. Well `micromamba` *not only* check `~/.mambarc` file, but also uses `~/.condarc`, one of them is enough. (The later is used by conda)
 
 The config file has few convenient options. On BLIS, please put these contents in the config file:
 
@@ -127,7 +127,7 @@ channels:
   - defaults
 auto_activate_base: true
 ```
- 
+
 - `channels` will allow you to skip -c option when installing packages
 - `auto_activate_base` will activate your base environment, by this, you will be using eg. python from your base environment rather than a system one.
 
