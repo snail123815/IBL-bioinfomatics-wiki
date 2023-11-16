@@ -2,7 +2,7 @@
 
 *By C.Du [@snail123815](https://github.com/snail123815)*
 
-(Avaliable softwares can be found in directory `/vol/local/conda_envs/`, use by [activating](../basic_tools/package_management_concept.md#activate-an-environment) corresponding environment)
+(Avaliable softwares can be found in directory `/vol/local/conda_envs/`, use by [activating](#run-a-program) corresponding environment)
 
 We manage our softwares using [conda](https://docs.conda.io/en/latest/) virtual environments, which have become a standard tool in the field and many other tools are compatible with its standard. To avoid confusion, we will use the term "environment" to refer specifically to conda-compatible virtual environments. By using environments, we can easily manage software dependencies and avoid conflicts between different software versions.
 
@@ -41,6 +41,32 @@ arguments:
 Options
 --------
 ...
+```
+
+Note that if you setup the config file as [described](#setting-up-config-file), you may see all environments by `micromamba env list`. But activating an environemnt by its name does not work:
+
+```sh
+(base) [user@blis ~]$ micromamba env list
+
+  Name           Active  Path
+─────────────────────────────────────────────────────────
+  base           *       /home/duc_test1/micromamba-base
+  quasan                 /vol/local/conda_envs/quasan
+  rrefinder              /vol/local/conda_envs/rrefinder
+(base) [user@blis ~]$ micromamba activate quasan
+critical libmamba Cannot activate, prefix does not exist at: /home/user/micromamba-base/envs/quasan
+# Meaning you can only activate shared environments using their path
+(base) [user@blis ~]$ micromamba activate /vol/local/conda_envs/quasan
+(/vol/local/conda_envs/quasan) [user@blis ~]$
+```
+
+You can make this process less painful by creating a soft link in your home directory:
+
+```shell
+cd ~
+ln -s /vol/local/conda_envs/ genvs
+# Then you can skip the long path in you command while activating an environment
+micromamba activate ~/genvs/antismash
 ```
 
 ## Install a program
