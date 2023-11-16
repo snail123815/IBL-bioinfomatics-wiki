@@ -8,7 +8,7 @@ depth: 3
 ---
 ```
 
-`micromamba` is a standalone `conda` replacement. About what is micromamba and how to use: https://mamba.readthedocs.io/en/latest/user_guide/micromamba.html
+`micromamba` is a standalone `conda` replacement. About what is micromamba and how to use, [follow this link](https://mamba.readthedocs.io).
 
 ## BLIS users
 
@@ -28,7 +28,7 @@ micromamba info
 
 Output should be
 
-```
+```sh
                                           __
          __  ______ ___  ____ _____ ___  / /_  ____ _
         / / / / __ `__ \/ __ `/ __ `__ \/ __ \/ __ `/
@@ -60,6 +60,8 @@ Commands above are also means of recovery when you encounter problems.
 
 ## Why choose micromamba instead of conda on BLIS?
 
+[Instructions on how micromamba works](../IBL_servers/Softwares.md) on BLIS.
+
 `micromamba` is a standalone reimplementation of conda package manager in C++. It provides same command line interface as conda. In addition to conda:
 
 1. Parallel downloading of repository data and package files using multi-threading
@@ -70,7 +72,7 @@ Commands above are also means of recovery when you encounter problems.
 
 ## Install micromamba from scratch
 
-ref. https://mamba.readthedocs.io/en/latest/installation.html#automatic-installation
+[Ref.](https://mamba.readthedocs.io/en/latest/installation/micromamba-installation.html)
 
 ### Install micromamba on Linux
 
@@ -92,7 +94,7 @@ micromamba info
 
 Output should be:
 
-```
+```sh
                                           __
          __  ______ ___  ____ _____ ___  / /_  ____ _
         / / / / __ `__ \/ __ `/ __ `__ \/ __ \/ __ `/
@@ -104,9 +106,9 @@ Output should be:
 
 ### Install micromamba on Windows
 
-Assuming you have Gitbash installed.
+[ref.](https://mamba.readthedocs.io/en/latest/installation/micromamba-installation.html)
 
-ref. https://mamba.readthedocs.io/en/latest/installation.html#windows
+Assuming you have Gitbash installed.
 
 1. Download latest micromamba using this [link](https://micro.mamba.pm/api/micromamba/win-64/latest).
    - Assume you downloaded "micromamba-1.4.0-0.tar.bz2", please change the name according to your downloads
@@ -134,7 +136,7 @@ ref. https://mamba.readthedocs.io/en/latest/installation.html#windows
 
    Output should be:
 
-   ```
+   ```sh
                                              __
             __  ______ ___  ____ _____ ___  / /_  ____ _
            / / / / __ `__ \/ __ `/ __ `__ \/ __ \/ __ `/
