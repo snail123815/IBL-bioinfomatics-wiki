@@ -9,7 +9,7 @@ maxdepth: 2
 ---
 IBL_servers/Intro.md
 IBL_servers/ssh access.md
-IBL_servers/Virtual environments.md
+IBL_servers/Softwares.md
 IBL_servers/Run jobs.md
 ```
 
