@@ -26,19 +26,19 @@ Conda uses a config file located in your home folder: `~/.condarc` to store your
 
 The config file has few convenient options. On BLIS, please put these contents in the config file:
 
-```
+```yml
 envs_dirs:
   - /vol/local/conda_envs
 pkgs_dirs:
-  - /vol/local/.conda_cache
+  - /vol/local/.conda_cache/USERNAME
 ```
 
 - `env_dirs` will allow conda env list command to list all environments from these dirs. A must have in our shared environment work flow.
-- `pkgs_dirs` set the cache dir. With this we save disk space by using a general cache.
+- `pkgs_dirs` set the cache dir, it is a easy-to-clean location.
 
 You can also add:
 
-```
+```yml
 channels:
   - bioconda
   - conda-forge

@@ -44,14 +44,15 @@ Now, please create a `.mambarc` file: (assuming you do not have this file)
 echo "envs_dirs:
   - /vol/local/conda_envs
 pkgs_dirs:
-  - /vol/local/.conda_cache" > ~/.mambarc
+  - /vol/local/.conda_cache/USERNAME" > ~/.mambarc
+# Remember to change USERNAME to your login ID
 ```
 
 This will do the following two things:
 
 1. Setting `envs_dirs` will add shared environments folder to your micromamba, now when you do `micromamba env list`, it will show all environments installed on BLIS
 
-2. Setting `pkgs_dirs` will let it use the general cache to reduce time needed for downloading packages and save disk space.
+2. Setting `pkgs_dirs` will let it use the general cache location for easier clean up.
 
 ```{note}
 Commands above are also means of recovery when you encounter problems.
