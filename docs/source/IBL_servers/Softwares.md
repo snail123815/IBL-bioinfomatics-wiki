@@ -2,7 +2,7 @@
 
 *By C.Du [@snail123815](https://github.com/snail123815)*
 
-(Avaliable softwares can be found in directory `/vol/local/conda_envs/`, use by [activating]() corresponding environment)
+(Avaliable softwares can be found in directory `/vol/local/conda_envs/`, use by [activating](../basic_tools/package_management_concept.md#activate-an-environment) corresponding environment)
 
 We manage our softwares using [conda](https://docs.conda.io/en/latest/) virtual environments, which have become a standard tool in the field and many other tools are compatible with its standard. To avoid confusion, we will use the term "environment" to refer specifically to conda-compatible virtual environments. By using environments, we can easily manage software dependencies and avoid conflicts between different software versions.
 
@@ -115,7 +115,7 @@ pkgs_dirs:
   - /vol/local/.conda_cache/USERNAME
 ```
 
-- `env_dirs` will allow conda env list command to list all environments from these dirs. A must have in our shared environment work flow.
+- `env_dirs` will allow `micromamba env list` command to list all environments inclduing our shared environments.
 - `pkgs_dirs` set the cache dir, it is a easy-to-clean location.
 
 You can also add:
@@ -136,6 +136,8 @@ The following commands will create a soft link (shortcut) in your home directory
 ```shell
 cd ~
 ln -s /vol/local/conda_envs/ genvs
+# Then you can skip the long path in you command while activating an environment
+micromamba activate ~/genvs/antismash
 ```
 
 If you need more information on how to use micromamba, please refer to our [micromamba instruction](../basic_tools/micromamba.md#blis-users).
