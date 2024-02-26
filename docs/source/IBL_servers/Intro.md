@@ -39,7 +39,7 @@ We give names to our servers: BLIS, FRODO, BILBO. All of them are powered by [Ro
 
 ## Basic knowledge of using linux shell
 
-It is easy to find information and basic training on line. If you do not know which to follow, we recommend you to follow this to start: 
+It is easy to find information and basic training online. If you do not know which to follow, we recommend you to follow this to start: 
 
 [The Unix Shell for novice](https://swcarpentry.github.io/shell-novice/)
 
