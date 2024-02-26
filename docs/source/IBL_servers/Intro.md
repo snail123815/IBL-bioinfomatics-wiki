@@ -47,9 +47,9 @@ It is easy to find information and basic training online. If you do not know whi
 
 You can access all three servers directly within Leiden University [Research Network](#what-is-research-network). From outside of Research Network, you need to jump through Leiden University ssh gateway, for this, you need your ULCN account.
 
-Please fill in the form "Request access SSH-gateway" on [this page](https://www.staff.universiteitleiden.nl/ict/help-and-support/application-forms/application-forms/service-units/ict-shared-service-centre) and wait for approval. Then you can set it up follow [this tutorial](https://www.staff.universiteitleiden.nl/binaries/content/assets/ul2staff/ict/handleidingen/manual-setting-up-ssh-gateway-2017-eng.pdf).
+Please fill in the form "Request access SSH-gateway" on [this page](https://www.staff.universiteitleiden.nl/ict/help-and-support/application-forms/application-forms/service-units/ict-shared-service-centre) and wait for approval. Then you can set it up follow [this tutorial (login needed)](https://helpdesk.universiteitleiden.nl/tas/public/ssp/content/detail/knowledgeitem?unid=4b176453-ad3f-418f-9c15-40a11471de5f).
 
-To ask for access to all servers, please send email to me (c.du\[at\]biology.leidenuniv.nl) or Edder Bustos Diaz (for Paco Lab only, e.d.bustos.diaz\[at\]biology.leidenuniv.nl). Please let us know the following info:
+To ask for access to all servers, please send email to me (c.du\[at\]biology.leidenuniv.nl). Please let me know the following info:
 
 - The user name you want to use for login. Only lower case letters and numbers allowed, start with letters. It is OK that you use the same user name as your ULCN account.
 - Your first name
@@ -59,7 +59,7 @@ To ask for access to all servers, please send email to me (c.du\[at\]biology.lei
 
 We will provide you information needed for accessing our servers.
 
-Currently we are using Slack group "IBL-Bioinformatic" for discussion and most importantly, send notifications about all servers. Please ask for access.
+Currently we are using Slack group "IBL-Bioinformatic" for discussion and most importantly, send notifications about all servers. You will get invitation link with your username and password.
 
 ## What is "Research Network"
 
