@@ -23,7 +23,7 @@ This is our main server, it has a shared local storage and use [conda environmen
 
 ### DINGLAB01
 
-Recently added. Home directory quota, shared local storage, and `micromamba` are setup the same as [BLIS](#blis)
+Recently added. Home directory quota, shared local storage, and `micromamba` are setup the same as [BLIS](#blis). Note, if you run your program using an environment on BLIS and want to use DINGLAB01, you need to setup the environment again. The architecture of the two machines are not completely the same.
 
 - Intel(R) Core(TM) i9-10900 CPU 
   - @ 2.80GHz
