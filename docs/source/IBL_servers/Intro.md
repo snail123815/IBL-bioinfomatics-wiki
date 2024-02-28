@@ -10,32 +10,49 @@ We give names to our servers: BLIS, FRODO, BILBO. All of them are powered by [Ro
 
 ### BLIS
 
+This is our main server, it has a shared local storage and use [conda environments (managed by `micromamba`)](Softwares.md) to manage softwares. Home directory has a quota of 20 GB for each user, no quota on shared local storage.
+
 - Intel(R) Core(TM) i9-10980XE
   - @ 3.00GHz
   - 36 cores
-- 256 GiB memory
+- 256 GB memory
 - NVIDIA Quadro RTX 4000
-  - 8 GiB memory
-- 2 TB SSD
-- 7 TB HDD
+  - 8 GB memory
+- `/home` 1.8 TB SSD; Quota for each user: 20 GB
+- `/vol/local` 7 TB HDD
 
-### FRODO
+### DINGLAB01
 
-- AMD Ryzen Threadripper PRO 5975WX
-  - @ 3.6GHz
-  - 32 cores
-- 64 GiB memory
-- NVIDIA Quadro RTX A4500
-  - 20 GiB memory
+Recently added. Home directory quota, shared local storage, and `micromamba` are setup the same as [BLIS](#blis). Note, if you run your program using an environment on BLIS and want to use DINGLAB01, you need to setup the environment again. The architecture of the two machines are not completely the same.
+
+- Intel(R) Core(TM) i9-10900 CPU 
+  - @ 2.80GHz
+  - 10 cores (20 with Hyper-Threading, on)
+- 32 GB memory
+- `/home` 390 GB SDD; Quota for each user: 20 GB
+- `/vol/local` 1 TB HDD
 
 ### BILBO
+
+Managed by [Paco lab](https://www.universiteitleiden.nl/en/staffmembers/paco-barona-gomez)
 
 - AMD Ryzen Threadripper PRO 5955WX
   - @ 4.0GHz
   - 16 cores
-- 32 GiB memory
+- 32 GB memory
 - NVIDIA T1000
-  - 8 GiB memory
+  - 8 GB memory
+
+### FRODO
+
+Managed by [Paco lab](https://www.universiteitleiden.nl/en/staffmembers/paco-barona-gomez)
+
+- AMD Ryzen Threadripper PRO 5975WX
+  - @ 3.6GHz
+  - 32 cores
+- 64 GB memory
+- NVIDIA Quadro RTX A4500
+  - 20 GB memory
 
 ## Basic knowledge of using linux shell
 
