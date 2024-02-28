@@ -18,8 +18,8 @@ This is our main server, it has a shared local storage and use [conda environmen
 - 256 GB memory
 - NVIDIA Quadro RTX 4000
   - 8 GB memory
-- /home 1.8 TB SSD
-- /vol/local 7 TB HDD
+- `/home` 1.8 TB SSD; Quota for each user: 20 GB
+- `/vol/local` 7 TB HDD
 
 ### DINGLAB01
 
@@ -29,8 +29,8 @@ Recently added. Home directory quota, shared local storage, and `micromamba` are
   - @ 2.80GHz
   - 10 cores (20 with Hyper-Threading, on)
 - 32 GB memory
-- /home 390 GB SDD
-- /vol/local 1 TB HDD
+- `/home` 390 GB SDD; Quota for each user: 20 GB
+- `/vol/local` 1 TB HDD
 
 ### BILBO
 

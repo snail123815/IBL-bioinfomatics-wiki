@@ -10,6 +10,22 @@ To manage software used by different users on BLIS, we use virtual environments 
 
 If you're planning to work with your own dataset on the servers, you'll need to transfer it first. To do this, you need to have already set up an SSH connection to ALICE (`hpc1`) and BLIS (`blis`).
 
+Please bare in mind that there is a quota system for your home directory `/home/USERNAME`. It should mainly be used to store settings, code, own apps. Not for data.
+
+To check how much quota has left for you:
+
+```sh
+quota -s
+Disk quotas for user duc (uid 148600000):
+     Filesystem   space   quota   limit   grace   files   quota   limit   grace
+/dev/mapper/rl-home
+                 16073M  20480M  25600M            154k       0       0
+# Meaning you have used 16GB of the 20GB.
+# You can store up to 25GB but after exceeding 20GB,
+# you will be given a grace time of few days, then
+# your home directory will be locked until you remove excess data
+```
+
 ### scp
 
 SCP for <u>s</u>ecure <u>c</u>o<u>p</u>y, or ssh cp, or safe cp...
