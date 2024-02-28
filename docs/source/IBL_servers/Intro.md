@@ -32,17 +32,6 @@ Recently added. Home directory quota, shared local storage, and `micromamba` are
 - /home 390 GB SDD
 - /vol/local 1 TB HDD
 
-### FRODO
-
-Managed by [Paco lab](https://www.universiteitleiden.nl/en/staffmembers/paco-barona-gomez)
-
-- AMD Ryzen Threadripper PRO 5975WX
-  - @ 3.6GHz
-  - 32 cores
-- 64 GB memory
-- NVIDIA Quadro RTX A4500
-  - 20 GB memory
-
 ### BILBO
 
 Managed by [Paco lab](https://www.universiteitleiden.nl/en/staffmembers/paco-barona-gomez)
@@ -53,6 +42,17 @@ Managed by [Paco lab](https://www.universiteitleiden.nl/en/staffmembers/paco-bar
 - 32 GB memory
 - NVIDIA T1000
   - 8 GB memory
+
+### FRODO
+
+Managed by [Paco lab](https://www.universiteitleiden.nl/en/staffmembers/paco-barona-gomez)
+
+- AMD Ryzen Threadripper PRO 5975WX
+  - @ 3.6GHz
+  - 32 cores
+- 64 GB memory
+- NVIDIA Quadro RTX A4500
+  - 20 GB memory
 
 ## Basic knowledge of using linux shell
 
