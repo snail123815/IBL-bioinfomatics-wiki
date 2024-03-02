@@ -8,6 +8,8 @@ Please read and follow the instructions:
 
 [Get an account on ALICE](https://pubappslu.atlassian.net/wiki/spaces/HPCWIKI/pages/37519441/Getting+an+account+on+ALICE)
 
+[Connecting to ALICE](https://pubappslu.atlassian.net/wiki/spaces/HPCWIKI/pages/37519483/Connecting+to+ALICE)
+
 If you are from IBL Leiden university, please also ask for shared folder access. Our shared folder is under PI name: [Bastienne Vriesendorp](https://www.universiteitleiden.nl/en/staffmembers/bastienne-vriesendorp), and please CC your request to her. 
 
 ## IBL on ALICE

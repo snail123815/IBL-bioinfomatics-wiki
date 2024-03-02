@@ -6,8 +6,8 @@
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-project = 'IBL-Bioinfo'
-copyright = '2023, IBL'
+project = 'IBL-Bioinformatics wike'
+copyright = '2024, IBL'
 author = 'IBL-Bioinformatics atelier'
 
 # -- General configuration ---------------------------------------------------

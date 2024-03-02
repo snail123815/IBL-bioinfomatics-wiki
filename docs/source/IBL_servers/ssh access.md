@@ -1,4 +1,4 @@
-# Access with ssh
+# SSH access tutorial
 
 *By C.Du [@snail123815](https://github.com/snail123815), Edder Bustos Diaz [@EdderDaniel](https://github.com/EdderDaniel)*
 
@@ -8,7 +8,9 @@ depth: 3
 ---
 ```
 
-To use our Linux servers, you'll need access to a command line prompt. Here's how to get started on different operating systems:
+To use our Linux servers, you'll need access to a command line interface (CLI). There is also possibility to use graphical user interface (GUI) to make connections, and then you still need to use a CLI based program to operate our servers.
+
+Here's how to get a CLI started on different operating systems:
 
 - For MacOS (Apple operating system) users, open the "Terminal" application by typing "Terminal" in the spotlight.
 - For Linux users, open the "Terminal" application (sometimes it is also called "shell").
@@ -24,13 +26,29 @@ To use our Linux servers, you'll need access to a command line prompt. Here's ho
 Please note that in this tutorial, we do not know the IP address you are connecting to, your `USERNAME`, or your `ULCN`. Please carefully check the commands you copy and adjust them accordingly.
 ```
 
-## Set up connection using ssh through SSH gateway
+## Determine your network location
 
-To access our server from outside Leiden University's [Research Network](./Intro.md#what-is-research-network), you need to tunnel through a gateway called sshgw.leidenuniv.nl. Once you are able to log in to the gateway using your ULCN username and password, you can proceed with the setup.
+The IBL servers are setup inside Leiden University's [Research Network](./Intro.md#what-is-research-network), which means intranet. To protect intranet from internet, gateway servers are hosted by Leiden University. Connecting IBL servers from internet can be done only through connecting to the gateway first and then from gateway to IBL servers. Of course, if you are inside our Leiden University intranet, you can make direct connections to IBL servers.
 
-It's perfectly safe to access the servers through the gateway, even if you're already within Research Network. For the purposes of this tutorial, we'll assume that you'll always use the gateway.
+Go to this link [determine your network location](./Intro.md#determine-your-network-location) for how.
 
-Once you've completed the setup, you can access our servers (e.g., BLIS) from your computer with a single command: `ssh blis`, `ssh frodo`, or `ssh bilbo`.
+If you are working on your own computer, even if it is an university managed laptop, no matter you can connected to the Research Network or not, it is always good to [setup connection using ssh through SSH gateway](#setup-connection-using-ssh-through-ssh-gateway)
+
+Otherwise, from an university managed desktop, you can [connect with a direct SSH connection](#make-direct-ssh-connection).
+
+## Setup connection using ssh through SSH gateway
+
+We recommend you use [Leiden University general purpose gateway](./Intro.md#leiden-university-general-purpose-gateway), if you use ALICE gateway, you only need to use ALICE gateway URL and your ALICE account for the gateway.
+
+URL of general purpose gateway is `sshgw.leidenuniv.nl`. Once you are able to log in to the gateway following [this tutorial (login needed)](https://helpdesk.universiteitleiden.nl/tas/public/ssp/content/detail/knowledgeitem?unid=4b176453-ad3f-418f-9c15-40a11471de5f), you can proceed with the following setups. It's perfectly safe to access the servers through the gateway, even if you're already within Research Network.
+
+GOAL: Once you've completed this setup, you can access our servers (e.g., BLIS) from your computer with a single command: `ssh blis`, `ssh frodo`, or `ssh bilbo`.
+
+Depends on the operating system you use, you might choose command line interface (CLI) or graphical user interface (GUI).
+
+### SSH connection through CLI
+
+
 
 ### Create ssh key pair
 
@@ -154,7 +172,7 @@ You can try it by following the instructions, but now you should be able to conn
 
 After above steps, you still cannot access the gateway and our servers with the ssh keys, ie, you still need to use your password every time you connect. To make our efforts yield valuable results, ou need to add the correct configuration to your `~/.ssh/config` file on your local machine. This is the configuration file for `ssh` program to know which key to use when connecting to a specific server.
 
-You must have noticed that in previous steps, we have generated two key pairs for "gateway" and "IBL servers" (BLIS, FRODO, BILBO). This is because we have the following infrastructure setup as indicated in the section [Set up connection using ssh through SSH gateway](#set-up-connection-using-ssh-through-ssh-gateway).
+You must have noticed that in previous steps, we have generated two key pairs for "gateway" and "IBL servers" (BLIS, FRODO, BILBO). This is because we have the following infrastructure setup as indicated in the section [Set up connection using ssh through SSH gateway](#setup-connection-using-ssh-through-ssh-gateway).
 
 ![IBL server infrastructure](../_static/images/ssh_jump_drawing.svg)
 
@@ -220,11 +238,11 @@ For detailed instruction and explanation of how ssh works, please refer to How t
 
 We use "environments" to manage softwares on all systems. On BLIS, we use `micromamba`, a `conda` replacement, for [environment management](../basic_tools/micromamba.md#blis-users).
 
-## Connect directly from inside Research Network
+## Make direct SSH connection
 
 If you have a desktop computer that is connected to a Ethernet socket on the wall, you don't need to jump from the University's SSH-gateway. You can omit key generation steps for `sshgwLeidenuniv`. Only create `iblservers`, `iblservers.pub` key pair and copy `iblservers.pub` directly to our server. The `config` file in `~/.ssh/` directory can also be simplified.
 
-Following are full steps (work in GitBash for Windows machines), please check corresponding section in [Set up connection using ssh through SSH gateway](#set-up-connection-using-ssh-through-ssh-gateway):
+Following are full steps (work in GitBash for Windows machines), please check corresponding section in [Set up connection using ssh through SSH gateway](#setup-connection-using-ssh-through-ssh-gateway):
 
 ```shell
 # Create ssh key pair
