@@ -90,7 +90,7 @@ Please fill in the form "Request access SSH-gateway" on [this page](https://www.
 
 Leiden University super computer cluster has its own gateway server, can be used also to connect Research Network. Please refer to [this page](../alice/alice_ibl.md#how-to-get-an-account) for more details. In principle, you still needs to be working or studying in Leiden University or have projects collaborating with us.
 
-``` {}
+```{note}
 The access to Research Network is not officially supported and you need to use it with your own risk!
 ```
 

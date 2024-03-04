@@ -8,7 +8,21 @@ depth: 3
 ---
 ```
 
-To use our Linux servers, you'll need access to a command line interface (CLI). There is also possibility to use graphical user interface (GUI) to make connections, and then you still need to use a CLI based program to operate our servers.
+To use our Linux servers, you'll need access to a command line interface (CLI). There is also possibility to use graphical user interface (GUI) to make connections. In any case, you need to first:
+
+## Determine your network location
+
+The IBL servers are setup inside Leiden University's [Research Network](./Intro.md#what-is-research-network), which means intranet. To protect intranet from internet, gateway servers are hosted by Leiden University. Connecting IBL servers from internet can be done only through connecting to the gateway first and then from gateway to IBL servers. Of course, if you are inside our Leiden University intranet, you can make direct connections to IBL servers.
+
+Go to this link [determine your network location](./Intro.md#determine-your-network-location) for how.
+
+If you are working on your own computer, even if it is an university managed laptop, no matter you can connected to the Research Network or not, it is always good to [setup connection using ssh through SSH gateway](#setup-connection-using-ssh-through-ssh-gateway)
+
+Otherwise, from an university managed desktop, you can [connect with a direct SSH connection](#make-direct-ssh-connection).
+
+For GUI setup, [follow this tutorial](./ssh%20access%20winscp.md).
+
+## Start a command line interface
 
 Here's how to get a CLI started on different operating systems:
 
@@ -26,31 +40,37 @@ Here's how to get a CLI started on different operating systems:
 Please note that in this tutorial, we do not know the IP address you are connecting to, your `USERNAME`, or your `ULCN`. Please carefully check the commands you copy and adjust them accordingly.
 ```
 
-## Determine your network location
-
-The IBL servers are setup inside Leiden University's [Research Network](./Intro.md#what-is-research-network), which means intranet. To protect intranet from internet, gateway servers are hosted by Leiden University. Connecting IBL servers from internet can be done only through connecting to the gateway first and then from gateway to IBL servers. Of course, if you are inside our Leiden University intranet, you can make direct connections to IBL servers.
-
-Go to this link [determine your network location](./Intro.md#determine-your-network-location) for how.
-
-If you are working on your own computer, even if it is an university managed laptop, no matter you can connected to the Research Network or not, it is always good to [setup connection using ssh through SSH gateway](#setup-connection-using-ssh-through-ssh-gateway)
-
-Otherwise, from an university managed desktop, you can [connect with a direct SSH connection](#make-direct-ssh-connection).
-
 ## Setup connection using ssh through SSH gateway
 
-We recommend you use [Leiden University general purpose gateway](./Intro.md#leiden-university-general-purpose-gateway), if you use ALICE gateway, you only need to use ALICE gateway URL and your ALICE account for the gateway.
+We recommend you use [Leiden University general purpose gateway](./Intro.md#leiden-university-general-purpose-gateway). Using ALICE gateway is not recommended. If you use, you need to use ALICE gateway URL and your ALICE account for the gateway. !!Use ALICE gateway at your own risk!!
 
 URL of general purpose gateway is `sshgw.leidenuniv.nl`. Once you are able to log in to the gateway following [this tutorial (login needed)](https://helpdesk.universiteitleiden.nl/tas/public/ssp/content/detail/knowledgeitem?unid=4b176453-ad3f-418f-9c15-40a11471de5f), you can proceed with the following setups. It's perfectly safe to access the servers through the gateway, even if you're already within Research Network.
 
 GOAL: Once you've completed this setup, you can access our servers (e.g., BLIS) from your computer with a single command: `ssh blis`, `ssh frodo`, or `ssh bilbo`.
 
-Depends on the operating system you use, you might choose command line interface (CLI) or graphical user interface (GUI).
+Depends on the operating system you use, you might choose command line interface (CLI, follow the instruction on this page) or [graphical user interface (GUI)](./ssh%20access%20winscp.md#ssh-connection-through-gui).
 
-### SSH connection through CLI
+## SSH connection through CLI
 
+CLI on all system shares the same commands except in PowerShell on Windows systems. The major difference is how to represent a file or directory (folder) path.
 
+```{admonition} Representation of Path
+Windows systems uses `DriveLetter:\path\to\your\file`, for example `"C:\Users\Public\Documents\"`. This is the same for Microsoft programs including CMD and PowerShell. The path starts with a drive letter followed by a colon, then uses "**backslash**", `\`, to separate directory hierarchy.
 
-### Create ssh key pair
+Linux/MacOS/GitBash however, only uses "**forwardslash**", `/`, to separate directory hierarchy. The **full path** always starts from the "**root**" directory represented by a single `/`. For example, the GitBash representation of the above mentioned directory will be `/c/Users/Public/Documents/`.
+
+(A standing pipe "|" that will fall to the right side "/" (forward) is a "forwardslash")
+```
+
+There are four steps:
+
+1. [Creeate ssh key pair](#create-ssh-key-pair)
+2. [Let server recognise your key](#let-server-recognise-your-key)
+3. [Configure local machine to use a correct key](#configure-local-machine-to-use-a-correct-key)
+4. [Connect](#connect)
+
+(create-ssh-key-pair)=
+### 1. Create ssh key pair
 
 In your terminal do:
 
@@ -59,7 +79,7 @@ mkdir -p ~/.ssh
 ssh-keygen -t ed25519 -C "From my PC" -f ~/.ssh/iblservers
 ```
 
-When you execute this command, you'll be prompted to enter a "passphrase". If you don't want to have to enter this passphrase every time you access our servers, you can simply press ENTER to proceed. Alternatively, you can choose your own passphrase and enter it twice.
+When you execute this command, you'll be prompted to enter a "passphrase". You can simply press ENTER to proceed. Otherwise this passphrase will be asked every time you use this key, (too) much  safer.
 
 You should see some output looks like this:
 
@@ -103,14 +123,17 @@ You can use the same key pair to access all servers. However, it's safer to crea
 ssh-keygen -t ed25519 -C "From my PC" -f ~/.ssh/sshgwLeidenuniv
 ```
 
-### Add keys to the servers
+(let-server-recognise-your-key)=
+### 2. Let server recognise your key
 
- However, you also need to inform the servers that these keys belong to you and that you should be allowed to use them when logging in. This process involves entering passwords, so it's important to be extremely careful with the passwords you use.
+However, you also need to inform the servers that these keys belong to you and that you should be allowed to use them when logging in. This process involves entering passwords, so it's important to be extremely careful with the passwords you use.
 
 - For the gateway connection, enter your ULCN password when the prompt says `ULCN@sshgw.leidenuniv.nl's` password:.
 - For the BLIS server connection, enter the password you received via email when the prompt says `USERNAME@999.999.999.999's password:`. You will be prompted with `Password expired. Change your password now.`, so you will need to enter your old password again, followed by your new password twice. Be sure to remember your new password! Once succeeded, your old password is not valid anymore.
 
-#### On Windows using PowerShell
+There is a difference using PowerShell on Windows compared to MacOS / Linux / GitBash / Cygwin. Please refer to the correct section for your setup.
+
+#### 2.1 On Windows using PowerShellA
 
 As the `ssh-copy-id` program is not available in Windows PowerShell, an alternative method is required to configure the server to recognize the generated keys.
 
@@ -130,7 +153,7 @@ type $env:USERPROFILE\.ssh\iblservers.pub | ssh USERNAME@999.999.999.999 "mkdir 
 type $env:USERPROFILE\.ssh\iblservers.pub | ssh USERNAME@999.999.999.999 "mkdir -p .ssh && cat >> .ssh/authorized_keys"
 ```
 
-#### On Mac / Linux or on Windows using GitBash / Cygwin
+#### 2.2 On MacOS, Linux, GitBash, Cygwin
 
 `ssh-copy-id` program exists on these systems. The command to add the `sshgwLeidenuniv` key pair to the Gateway and upload the corresponding public key file is:
 
@@ -168,7 +191,8 @@ and check to make sure that only the key(s) you wanted were added.
 
 You can try it by following the instructions, but now you should be able to connect from your local machine using a easier command.
 
-### Config your local machine to use the keys
+(configure-local-machine-to-use-a-correct-key)=
+### 3. Configure local machine to use a correct key
 
 After above steps, you still cannot access the gateway and our servers with the ssh keys, ie, you still need to use your password every time you connect. To make our efforts yield valuable results, ou need to add the correct configuration to your `~/.ssh/config` file on your local machine. This is the configuration file for `ssh` program to know which key to use when connecting to a specific server.
 
@@ -224,7 +248,8 @@ Please note that the command above appends text to the config file. **Do not run
 It's important to note that the .ssh/ directory is usually hidden. To find it, configure your file explorer to show hidden files.
 ```
 
-### Connect
+(connect)=
+### 4. Connect
 
 You have successfully generated and stored the keys on your local computer, and configured your computer to use these keys when connecting to the gateway and the BLIS server. Now you should be able to login BLIS with one command from your local machine:
 
