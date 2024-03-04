@@ -6,8 +6,8 @@
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-project = 'IBL-Bioinfo'
-copyright = '2023, IBL'
+project = 'IBL-Bioinformatics wiki'
+copyright = '2024, IBL'
 author = 'IBL-Bioinformatics atelier'
 
 # -- General configuration ---------------------------------------------------
@@ -17,6 +17,7 @@ extensions = [
     "myst_parser",
     "sphinxcontrib.mermaid",
     "sphinx_copybutton",
+    "sphinx_tippy",
 ]
 templates_path = ['_templates']
 exclude_patterns = ['_excluded']
@@ -69,4 +70,5 @@ myst_enable_extensions = [
     "strikethrough",
     "substitution",
     "tasklist",
+    "attrs_block",
 ]
