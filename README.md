@@ -27,7 +27,7 @@ Sphinx is a documentation generator that translates a set of plain text source f
 
 ### General pipeline
 
-Check [this page](https://www.freecodecamp.org/news/a-simple-git-guide-and-cheat-sheet-for-open-source-contributors/) for how to contribute. Here is a brief introduction of how to work with this repository.
+Check [this page](https://www.freecodecamp.org/news/a-simple-git-guide-and-cheat-sheet-for-open-source-contributors/) for how to contribute. Here is a brief summary.
 
 Genearly:
 
@@ -36,7 +36,7 @@ Genearly:
 3. Create a branch of your own `git checkout -b your-branch-name`, do not touch "main" branch.
    1. Check your remote status
       `git remote -v`
-      The result should contain two lines starts with "upstream https://github.com/snail123815/IBL-bioinformatics-wiki.git"
+      The result should contain two lines starts with `upstream https://github.com/snail123815/IBL-bioinformatics-wiki.git`
    2. Pull from upstream again to keep updated. You need to do this from time to time during your development (writing).
       `git pull upstream main`
    3. Work on your contributions. From time to time, you can summarise part of your work with `git add path/to/your.md` and commit it to your branch `git commit -m "your commit message"`, then push to your branch `git push --set-upstream origin your-branch-name` (`--set-upstream origin your-branch-name` only needs to be done the first time you push).
