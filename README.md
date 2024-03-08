@@ -39,9 +39,9 @@ Genearly:
       The result should contain two lines starts with "upstream https://github.com/snail123815/IBL-bioinformatics-wiki.git"
    2. Pull from upstream again to keep updated. You need to do this from time to time during your development (writing).
       `git pull upstream main`
-   3. Work on your contributions. From time to time, you can summarise part of your work with `git add path/to/your.md` and commit it to your branch `git commit -m "your commit message"`, then push to your branch.
-4. Once finished, pull from upstream main again to merge changes from upstream.
-5. 
+   3. Work on your contributions. From time to time, you can summarise part of your work with `git add path/to/your.md` and commit it to your branch `git commit -m "your commit message"`, then push to your branch `git push --set-upstream origin your-branch-name` (`--set-upstream origin your-branch-name` only needs to be done the first time you push).
+4. Once finished, pull from upstream main again to merge changes from upstream, then push all changes you made.
+5. Go to the webpage of your forked repository, a green button "Compare & pull request" appear, click it, follow the screen to write messages. When I saw it, and checked everything is correct, I will approve the merge.
 
 #### How to work on your contribution
 
@@ -65,6 +65,6 @@ You can now build the html page locally to see if your content is correctly form
 
 Once you are satisfied, commit your changes to this branch. It is good to check now if the original repository has changed or not by `git pull upstream main`
 
-Assume everything is alright now, you can push your branch, then create a pull request (Code -> branches -> "New pull request" from the branch you are working on). One other people needs to approve this and merge (please do "squash and merge") to `main` branch.
+Assume everything is alright now, you can push your branch, then create a pull request.
 
-The document will then rebuild and publish automatically.
+After pull request has been approved, the document will then rebuild and publish automatically.
