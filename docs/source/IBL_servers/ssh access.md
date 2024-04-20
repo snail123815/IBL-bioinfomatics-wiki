@@ -26,12 +26,13 @@ For GUI setup, [follow this tutorial](./ssh%20access%20winscp.md).
 
 Here's how to get a CLI started on different operating systems:
 
-- For MacOS (Apple operating system) users, open the "Terminal" application by typing "Terminal" in the spotlight.
+- For MacOS (Apple operating system) users, open the "Terminal" application by typing "Terminal" in spotlight.
 - For Linux users, open the "Terminal" application (sometimes it is also called "shell").
 - For Windows users, there are several options:
-  - WSL (Windows Subsystem for Linux) with the default Linux distribution. You can find more detailed instructions on how to install it [here](https://learn.microsoft.com/en-us/windows/wsl/install).
-  - GitBash provides a shell environment similar to Linux systems, and the settings will be the same.
-  - PowerShell comes by default with Windows. The latest version comes with the software "ssh". However, we do not recommend using this method, as it may cause unforeseen problems and the commands to set up may be slightly different.
+  - (Recommended) [WinSCP](https://winscp.net/eng/downloads.php) + [PuTTY](https://apps.microsoft.com/store/detail/putty/XPFNZKSKLBP7RJ). These programs are open source and free for personal use. You can download and run them without installation. It is friendly to university/company computers where you cannot install program by yourself. For how to set them up, please check [this tutorial](ssh%20access%20winscp.md).
+  - (Recommended) [Git for windows](https://gitforwindows.org) provide "GitBash" program that comes with a <u>shell</u> environment similar to Linux systems, and the settings will also be the same as Linux. The "GitBash" program can be executed without installation.
+  - WSL (Windows Subsystem for Linux) with the any Linux distribution. You can find more detailed instructions on how to install and start it [here](https://learn.microsoft.com/en-us/windows/wsl/install). Once you have WSL setup correctly, you will have access to a pure <u>shell</u> environment, simply set the connection up as you are using Linux.
+  - **PowerShell** comes by default with Windows. The default version comes with the software called "openSSH", providing command line program `ssh`. However, I recommend you to use the latest version of PowerShell, [install it from "Microsoft Store"](https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell-on-windows#installing-from-the-microsoft-store). If that is unsuccessful, check other methods from the link. We do not recommend computer novices to choose this method, as it may cause unforeseen problems and the commands to set up may be slightly different. Prepare to spend a bit more time on it.
 
 ```{admonition} Do not copy directly
 :class: warning
