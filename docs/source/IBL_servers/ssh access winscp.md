@@ -4,6 +4,12 @@ orphan: true
 
 # WinSCP and PuTTY SSH access tutorial
 
+```{contents}
+---
+depth: 3
+---
+```
+
 There are many graphical user interface (GUI) software on the market you can use on Windows systems to make ssh connections. We choose [WinSCP](https://winscp.net/) and [PuTTY](https://putty.org/) because:
 
 1. They are both open source and free software
@@ -11,13 +17,25 @@ There are many graphical user interface (GUI) software on the market you can use
 
 ## Install both WinSCP and PuTTY
 
+These software are open source and free for personal use. They provide **portable** programs, which means you can download it and run the program without installation, friendly to university/company computers where you cannot install program by yourself.
+
+### WinSCP
+
 WinSCP, as its name shows, "<u>Win</u>dows <u>s</u>afe <u>c</u>o<u>p</u>y", is only responsible for copying files to or from the server. It relies on the server to have "SFTP service". SFTP stands for "Secure file transfer protocol".
+
+Use [this link to download WinSCP](https://winscp.net/eng/downloads.php). If you cannot install software, find the "Portable executables" download, and unzip it to any location that you choose and have access to store program.
+
+WinSCP is essentially just a program allowing you to copy files from and to the server, you need PuTTY to connect to the shell environment of the server.
+
+### PuTTY
 
 PuTTY is the actual SSH client. WinSCP can setup the same connection configuration for PuTTY and can call PuTTY from its GUI.
 
 For Leiden University provided computers, please find the latest version of both software in the software centre, install all of them.
 
-For your own computer, you can download and install PuTTY either by downloading an installer from [PuTTY official website](https://putty.org) or from Windows Store (Windows 10 and later). For WinSCP, the only free option is download an installer from its [official website](https://winscp.net/).
+For your own computer, you can download and install PuTTY either by downloading an installer from [Windows Store](https://apps.microsoft.com/store/detail/putty/XPFNZKSKLBP7RJ) (Windows 10 and later) or from [PuTTY official website](http://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html). If you cannot install softwares on your computer, find "Alternative binary files", from the last one "putty.zip", download the zip file of corresponding architecture (usually 64-bit x86). Otherwise, you can just use the installer (package files).
+
+If you downloaded "putty.zip", unzip it to a location you know, make sure you can execute putty.exe in the archive.
 
 ## Determine your network location
 
@@ -111,7 +129,6 @@ You should see "Information" window telling you "Public key "from my ASUS" was i
 
 Then click "OK" in the "Advanced Site Settings" window. You will be back to the "Login" window, click "Save" to save your changes.
 
-
 Now the "Login" button on the bottom should be green ![login](../_static/images/connect_login_button.jpg), click it to test. If success, you should not be promoted to enter the password again (except if you set passphrase while generating key file) and will be promoted with the following "Authentication Banner".
 
 ![gateway notification](../_static/images/connect_connect_host_gw_Authentication_Banner.jpg)
@@ -174,15 +191,26 @@ However, this is only connected to the SFTP server. To actually operate on the s
 
 ![putty icon](../_static/images/connect_putty.jpg)
 
+:::{NOTE}
+
+If PuTTY executable is at expected location (meaning you used a installer and chose the default installation location), it should work by default.
+
+If your PuTTY is not "installed" but can be only executed from unzipped "putty.exe" (portable version), WinSCP will tell you it cannot find putty executable. Do not panic. Go to WinSCP preferences and "Browse" to find the full path of your "putty.exe" file:
+
+![putty path](../_static/images/putty_path.jpg)
+
+Then the PuTTY icon should work.
+:::
+
 A "PuTTY Security Alert" will appear, asking you if you trust this server. Click "<u>A</u>ccept" to trust it. Then you will see a terminal window:
 
 ![putty terminal](../_static/images/connect_terminal.jpg)
 
 Congratulations! You have finished all setup. You can repeat the procedure for other servers if you need them. Below is a simplified tutorial when you don't need a gateway server to connect.
 
-## Make direct SSH connection
+## Make direct SSH connection using WinSCP (University Desktop with PowerShell)
 
-There is no guarantee that the procedure will be completely the same on your machine, if you find it strange, please read the screen and you should be able to sort out. If not, please make screen shots and create a "New issue" ([@snail123815](https://github.com/snail123815/IBL-bioinformatics-wiki/issues)) (or send me an email (c.du\[at\]biology.leidenuniv.nl) with your screen shots and detailed information).
+Find both PuTTY and WinSCP in your "Software Centre" and install them.
 
 Open WinSCP, a "Login" window appear. Fill in the form:
 
@@ -264,3 +292,7 @@ A "PuTTY Security Alert" will appear, asking you if you trust this server. Click
 ![putty terminal](../_static/images/connect_terminal.jpg)
 
 Congratulations! You have finished all setup. You can repeat the procedure for other servers if you need them. 
+
+## No Guarantee
+
+There is no guarantee that the procedure will be completely the same on your machine, if you find it strange, please read the screen and you should be able to sort out. If not, please make screen shots and create a "New issue" ([@snail123815](https://github.com/snail123815/IBL-bioinformatics-wiki/issues)) (or send me an email (c.du\[at\]biology.leidenuniv.nl) with your screen shots and detailed information).
