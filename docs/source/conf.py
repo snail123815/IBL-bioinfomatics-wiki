@@ -71,4 +71,5 @@ myst_enable_extensions = [
     "substitution",
     "tasklist",
     "attrs_block",
+    "attrs_inline",
 ]

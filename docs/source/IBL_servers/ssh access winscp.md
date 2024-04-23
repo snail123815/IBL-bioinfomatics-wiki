@@ -4,6 +4,12 @@ orphan: true
 
 # WinSCP and PuTTY SSH access tutorial
 
+```{contents}
+---
+depth: 3
+---
+```
+
 There are many graphical user interface (GUI) software on the market you can use on Windows systems to make ssh connections. We choose [WinSCP](https://winscp.net/) and [PuTTY](https://putty.org/) because:
 
 1. They are both open source and free software
@@ -202,9 +208,9 @@ A "PuTTY Security Alert" will appear, asking you if you trust this server. Click
 
 Congratulations! You have finished all setup. You can repeat the procedure for other servers if you need them. Below is a simplified tutorial when you don't need a gateway server to connect.
 
-## Make direct SSH connection
+## Make direct SSH connection using WinSCP (University Desktop with PowerShell)
 
-There is no guarantee that the procedure will be completely the same on your machine, if you find it strange, please read the screen and you should be able to sort out. If not, please make screen shots and create a "New issue" ([@snail123815](https://github.com/snail123815/IBL-bioinformatics-wiki/issues)) (or send me an email (c.du\[at\]biology.leidenuniv.nl) with your screen shots and detailed information).
+Find both PuTTY and WinSCP in your "Software Centre" and install them.
 
 Open WinSCP, a "Login" window appear. Fill in the form:
 
@@ -286,3 +292,7 @@ A "PuTTY Security Alert" will appear, asking you if you trust this server. Click
 ![putty terminal](../_static/images/connect_terminal.jpg)
 
 Congratulations! You have finished all setup. You can repeat the procedure for other servers if you need them. 
+
+## No Guarantee
+
+There is no guarantee that the procedure will be completely the same on your machine, if you find it strange, please read the screen and you should be able to sort out. If not, please make screen shots and create a "New issue" ([@snail123815](https://github.com/snail123815/IBL-bioinformatics-wiki/issues)) (or send me an email (c.du\[at\]biology.leidenuniv.nl) with your screen shots and detailed information).
