@@ -60,7 +60,7 @@ Commands above are also means of recovery when you encounter problems.
 
 ## Why choose micromamba instead of conda on BLIS?
 
-[Instructions on how micromamba works](../IBL_servers/Softwares.md) on BLIS.
+[Instructions on how micromamba works](../IBL_servers/Program%20setup.md) on BLIS.
 
 `micromamba` is a standalone reimplementation of conda package manager in C++. It provides same command line interface as conda. In addition to conda:
 

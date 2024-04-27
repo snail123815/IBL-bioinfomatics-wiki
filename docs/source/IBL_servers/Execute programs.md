@@ -1,10 +1,10 @@
-# Run programs
+# Execute programs
 
 *By C.Du [@snail123815](https://github.com/snail123815)*
 
 ## Check & install software
 
-To manage software used by different users on BLIS, we use virtual environments located at /vol/local/conda_envs. You can check if the environment for the software you want to use already exists at this location. If it does not exist, you will need to create one and install the software yourself. For detailed instructions on how to create virtual environments and install software, please refer to the [Softwares](./Softwares.md) guide.
+To manage software used by different users on BLIS, we use virtual environments located at `/vol/local/conda_envs`. You can check if the environment for the software you want to use already exists at this location. If it does not exist, you may need to create one and install the software yourself. For detailed instructions on how to create virtual environments and install software, please refer to the [program setup](./Program%20setup.md) guide.
 
 ## File transfer
 

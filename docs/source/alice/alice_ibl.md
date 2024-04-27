@@ -86,4 +86,4 @@ Yes, we only have 600GB, and it is almost full. Please do not store data on our 
 
 ## Transfer data
 
-Refer to [Run jobs - file transfer](../IBL_servers/Run%20jobs.md#file-transfer).
+Refer to [Run jobs - file transfer](../IBL_servers/Execute%20programs.md#file-transfer).

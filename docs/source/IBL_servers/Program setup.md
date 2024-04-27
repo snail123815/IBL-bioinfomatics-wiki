@@ -1,4 +1,4 @@
-# Softwares
+# Program setup
 
 *By C.Du [@snail123815](https://github.com/snail123815)*
 
