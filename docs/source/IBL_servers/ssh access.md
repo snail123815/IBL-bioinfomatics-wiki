@@ -310,7 +310,7 @@ Once inside BLIS, you can directly connect to another servers using `ssh` comman
 (ALICE uses the same setup, please refer to [How to login to ALICE or SHARK - HPC wiki](https://pubappslu.atlassian.net/wiki/spaces/HPCWIKI/pages/37748771/How+to+login+to+ALICE+or+SHARK).)
 
 :::{note}
-Before you run any programs, you have to understand that we use "environments" to manage softwares on all systems. On BLIS, we use `micromamba`, a `conda` replacement, for environment management, [check it out](../basic_tools/micromamba.md#blis-users).
+Before you run any programs, you have to understand that we use "environments" to manage softwares on all systems. On BLIS, we use `micromamba`, a `conda` replacement, for environment management, [check it out](../IBL_servers/Execute%20programs.md).
 :::
 
 (make-direct-SSH-connection)=
