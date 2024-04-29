@@ -13,8 +13,8 @@ maxdepth: 2
 ---
 IBL_servers/Intro.md
 IBL_servers/ssh access.md
-IBL_servers/Softwares.md
-IBL_servers/Run jobs.md
+IBL_servers/Execute programs.md
+IBL_servers/Program setup.md
 ```
 
 ```{toctree}

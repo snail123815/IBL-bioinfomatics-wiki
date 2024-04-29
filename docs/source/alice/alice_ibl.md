@@ -42,7 +42,7 @@ Load Conda module:
 module load Miniconda3
 ```
 
-Your `HOME` dir is limited to a quota of 15 GB, as a result, we created a shared dir for our group and we can use and create shared Conda environments, just like [on BLIS](../basic_tools/micromamba.md#blis-users)
+Your `HOME` dir is limited to a quota of 15 GB, as a result, we created a shared dir for our group and we can use and create shared Conda environments, just like [on BLIS](../IBL_servers/Execute%20programs.md)
 `/data1/projects/pi-vriesendorpb/condaEnvs`
 
 TEMP/CACHE dir for pkgs:
@@ -86,4 +86,4 @@ Yes, we only have 600GB, and it is almost full. Please do not store data on our 
 
 ## Transfer data
 
-Refer to [Run jobs - file transfer](../IBL_servers/Run%20jobs.md#file-transfer).
+Refer to [Run jobs - file transfer](../IBL_servers/Execute%20programs.md#file-transfer).

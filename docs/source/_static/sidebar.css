@@ -14,3 +14,7 @@ div.sphinxsidebar li.toctree-l1 {
     font-family: sans-serif;
     font-size: 0.8rem;
 }
+
+h1.logo {
+    font-size: 1.4rem;
+}

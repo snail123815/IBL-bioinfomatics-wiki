@@ -14,7 +14,7 @@ Not all servers have [ECC memory](https://serverfault.com/questions/5887/what-is
 
 ### BLIS
 
-This is our main server, it has a shared local storage and use [conda environments (managed by `micromamba`)](Softwares.md) to manage softwares. Home directory has a quota of 20 GB for each user, no quota on shared local storage.
+This is our main server, it has a shared local storage and use [conda environments (managed by `micromamba`)](Program%20setup.md) to manage softwares. Home directory has a quota of 20 GB for each user, no quota on shared local storage.
 
 - Intel(R) Core(TM) i9-10980XE
   - @ 3.00GHz

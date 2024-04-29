@@ -10,57 +10,13 @@ depth: 3
 
 `micromamba` is a standalone `conda` replacement. About what is micromamba and how to use, [follow this link](https://mamba.readthedocs.io).
 
-## BLIS users
+## IBL server users
 
-BLIS have `micromamba` in your PATH, but if you are using it for the first time, you need to run the following command and **restart your shell** after it finishes:
-
-(Assuming you are using **bash**)
-
-```shell
-micromamba shell init -s bash -p ~/micromamba-base
-```
-
-After a shell restart, run the following command to check:
-
-```shell
-micromamba info
-```
-
-Output should be
-
-```sh
-                                          __
-         __  ______ ___  ____ _____ ___  / /_  ____ _
-        / / / / __ `__ \/ __ `/ __ `__ \/ __ \/ __ `/
-       / /_/ / / / / / / /_/ / / / / / / /_/ / /_/ /
-      / .___/_/ /_/ /_/\__,_/_/ /_/ /_/_.___/\__,_/
-     /_/
-...
-```
-
-Now, please create a `.mambarc` file: (assuming you do not have this file)
-
-```shell
-echo "envs_dirs:
-  - /vol/local/conda_envs
-pkgs_dirs:
-  - /vol/local/.conda_cache/USERNAME" > ~/.mambarc
-# Remember to change USERNAME to your login ID
-```
-
-This will do the following two things:
-
-1. Setting `envs_dirs` will add shared environments folder to your micromamba, now when you do `micromamba env list`, it will show all environments installed on BLIS
-
-2. Setting `pkgs_dirs` will let it use the general cache location for easier clean up.
-
-```{note}
-Commands above are also means of recovery when you encounter problems.
-```
+The program is available, but please follow [execute programs tutorial](../IBL_servers/Execute%20programs.md) for how to use.
 
 ## Why choose micromamba instead of conda on BLIS?
 
-[Instructions on how micromamba works](../IBL_servers/Softwares.md) on BLIS.
+[Instructions on how micromamba works](../IBL_servers/Program%20setup.md) on BLIS.
 
 `micromamba` is a standalone reimplementation of conda package manager in C++. It provides same command line interface as conda. In addition to conda:
 
@@ -71,6 +27,8 @@ Commands above are also means of recovery when you encounter problems.
 5. `micormamba` executable relays only the one executable file itself, very easy to maintain.
 
 ## Install micromamba from scratch
+
+**Do NOT do this on any of our servers!** This tutorial is for you to install this in your own computer (**not** university/company owned).
 
 [Ref.](https://mamba.readthedocs.io/en/latest/installation/micromamba-installation.html)
 
@@ -108,7 +66,7 @@ Output should be:
 
 [ref.](https://mamba.readthedocs.io/en/latest/installation/micromamba-installation.html)
 
-Assuming you have Gitbash installed.
+#### Gitbash install micromamba
 
 1. Download latest micromamba using this [link](https://micro.mamba.pm/api/micromamba/win-64/latest).
    - Assume you downloaded "micromamba-1.4.0-0.tar.bz2", please change the name according to your downloads
@@ -125,7 +83,7 @@ Assuming you have Gitbash installed.
 4. Now micromamba.exe is in your PATH, you can initiate your shell with the following command:
 
    ```shell
-   micromamba.exe shell init -s bash -p ~/micromamba
+   micromamba.exe shell init -s bash -p $env:HOME/micromamba-base
    ```
 
    Note you need to answer "y" for long path name support if you have administrator rights. Else "n" to skip it. Now **restart** your shell, do the following:
@@ -153,3 +111,35 @@ Assuming you have Gitbash installed.
    ```
 
    This will use "[winpty](https://github.com/rprichard/winpty)" to supply python with a Unix pty-master for communicating with Windows console. It works by starting a hidden console window and bridging between the console API and terminal input/output escape codes.
+
+#### Gitbash install PowerShell
+
+Modified from [ref.](https://mamba.readthedocs.io/en/latest/installation/micromamba-installation.html#windows)
+
+```PowerShell
+# Download
+Invoke-Webrequest -URI https://micro.mamba.pm/api/micromamba/win-64/latest -OutFile micromamba.tar.bz2
+```
+
+Now you need to find the downloaded micromamba.tar.bz2 file, extract the archive use [7-Zip](http://www.7-zip.org/download.html) or any other program that can extract `.tar.bz2` file. (Windows 11 file explorer can directly open this file)
+
+Now inside extracted directory, find `Library\bin\micromamba.exe` file, move it to your current directory or a programs directory you define by yourself. If you did the later, you need to navigate to the target directory. Then
+
+```PowerShell
+# You should be able to run the program now.
+.\micromamba.exe --help
+
+# You can use e.g. $HOME\micromamba-base as your base prefix
+$Env:MAMBA_ROOT_PREFIX=$HOME+"\micromamba-base"
+
+# Initialize the shell
+.\micromamba.exe shell init -s powershell -p $Env:MAMBA_ROOT_PREFIX
+```
+
+After **restarting** your PowerShell, you can start using it:
+
+```PowerShell
+micromamba create -n test
+micromamba activate test
+micromamba install -c defaults python
+```
