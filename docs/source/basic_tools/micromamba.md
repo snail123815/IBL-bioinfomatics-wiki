@@ -125,7 +125,7 @@ Assuming you have Gitbash installed.
 4. Now micromamba.exe is in your PATH, you can initiate your shell with the following command:
 
    ```shell
-   micromamba.exe shell init -s bash -p ~/micromamba
+   micromamba.exe shell init -s bash -p $env:HOME/micromamba-base
    ```
 
    Note you need to answer "y" for long path name support if you have administrator rights. Else "n" to skip it. Now **restart** your shell, do the following:

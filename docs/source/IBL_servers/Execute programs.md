@@ -2,13 +2,83 @@
 
 *By C.Du [@snail123815](https://github.com/snail123815)*
 
-## Check & install software
+We manage our softwares using [conda](https://docs.conda.io/en/latest/) virtual environments, which have become a standard tool in the field and many other tools are compatible with its standard. To avoid confusion, we will use the term "environment" to refer specifically to conda-compatible virtual environments. By using environments, we can easily manage software dependencies and avoid conflicts between different software versions.
 
-To manage software used by different users on BLIS, we use virtual environments located at `/vol/local/conda_envs`. You can check if the environment for the software you want to use already exists at this location. If it does not exist, you may need to create one and install the software yourself. For detailed instructions on how to create virtual environments and install software, please refer to the [program setup](./Program%20setup.md) guide.
+On BLIS, we use a tool called **[micromamba](https://mamba.readthedocs.io/en/latest/user_guide/micromamba.html)**, a lightweight and efficient alternative to conda, to manage these environments. A shared directory dedicated to storing, sharing, and modifying environments is created on BLIS. By default, all users on BLIS should be in a premission group called "condablis". This group grant users access to our shared environments.
+
+Please make sure you are in "condablis" group by running `groups` command. You should see "condablis" in the output of this command. If not, please contact server admin.
+
+```sh
+$ groups
+sgr condablis
+```
+
+To manage software used by different users on BLIS, we use virtual environments located at `/vol/local/conda_envs`. You can check if the environment for the software you want to use already exists at this location. If not, you may need to create one and install the software yourself. For detailed instructions on how to create virtual environments and install software, please finish [program setup](./Program%20setup.md) guide.
+
+## Prepare micromamba
+
+The program `micromamba` is already installed on the server, but you need to do some configuration before you can activate and create environments.
+
+Note, you only need to do this **once** on **one** server.
+
+Here is how (assuming you are using default shell `bash`):
+
+```sh
+micromamba shell init -s bash -p ~/micromamba-base
+```
+
+Above command will create a "base" environment at your home directory. Then a script will be put into your `~/.bashrc` file. Now you need to run the script by:
+
+```sh
+source ~/.bashrc
+```
+
+Next time when you start your `bash` shell (at login), the script will be automatically executed.
+
+Now you should be able to run this command:
+
+```sh
+micromamba info
+```
+
+Output should be:
+
+```sh
+                                          __
+         __  ______ ___  ____ _____ ___  / /_  ____ _
+        / / / / __ `__ \/ __ `/ __ `__ \/ __ \/ __ `/
+       / /_/ / / / / / / /_/ / / / / / / /_/ / /_/ /
+      / .___/_/ /_/ /_/\__,_/_/ /_/ /_/_.___/\__,_/
+     /_/
+...
+```
+
+If you see something else, please try to restart your shell and repeat the above steps. Contact for help if still no success.
+
+## Plan and notify others before execute long program
+
+Once you have done [program setup](./Program%20setup.md), it is time to plan a real job. Please follow these steps:
+
+1. Check the "jobs-on-servers" channel in our Slack group for pinned messages.
+2. Log in to the system and use htop or top to check for heavily running processes. Notify the channel if you see any anomalies.
+3. Run your job. If it will take a long time, run it in a `screen` session and check its status.
+4. Inform everyone else in the "jobs-on-servers" channel using this format:  
+   "{Job type} on {SERVER} is using {number} cores, (approximately, optional) {number} ram, until ~(approximately) {time}."  
+   For example, "phylophlan on BLIS is using 8 cores, 100 GB ram, until ~20 Nov 9:00." Pin this message if the job list is a bit long.
+5. Once your job is done, edit the message to include a big "DONE" at the beginning and unpin it.
+
+```{admonition} Rule of thumb
+- For any job, leave at least 2 cores free.
+- For short jobs, use as many cores as possible.
+- For long jobs, use maximum half of the avaliable cores. If more cores are needed, notify everyone at least half hour in advance.
+  For example, "PLANNING phylophlan on BLIS, is using 18 cores, 160 GB ram, from 19 Nov 20:00 till ~20 Nov 9:00."  
+```
 
 ## File transfer
 
-If you're planning to work with your own dataset on the servers, you'll need to transfer it first. To do this, you need to have already set up an SSH connection to ALICE (`hpc1`) and BLIS (`blis`).
+If you're planning to work with your own dataset on the servers, you'll need to transfer it first. To do this, you need to have already set up an SSH connection BLIS (`blis`).
+
+For WinSCP+PuTTY users, just use the GUI to transfer.
 
 Please bare in mind that there is a quota system for your home directory `/home/USERNAME`. It should mainly be used to store settings, code, own apps. Not for data.
 
@@ -25,6 +95,8 @@ Disk quotas for user duc (uid 148600000):
 # you will be given a grace time of few days, then
 # your home directory will be locked until you remove excess data
 ```
+
+Two programs you can use to transfer data: `scp` and `rsync`
 
 ### scp
 
@@ -51,7 +123,7 @@ scp -r path/to/dir blis:/vol/data/username
 
 ### rsync
 
-`rsync` is a more reliable tool for copying large datasets. It can continue the transfer from where it left off in case of interruption.
+`rsync` is a more reliable tool for copying large datasets. It can continue the transfer from where it left off in case of interruption. (PowerShell does not have this program, use `scp` or WinSCP instead.)
 
 The syntax for `rsync` is almost the same as `scp`:
 
@@ -66,25 +138,6 @@ rsync -aP path/to/dir blis:/vol/data/username/
 
 `-a` means archiving the directory, it will copy everything associated with the file, including its creation time, permissions etc. It implies `-rlptgoD`.  
 `-P` to show progress.
-
-## Run your jobs
-
-Please follow these steps:
-
-1. Check the "jobs-for-blis-frodo-bilbo" channel in our Slack group for pinned messages.
-2. Log in to the system and use htop or top to check for heavily running processes. Notify the channel if you see any anomalies.
-3. Run your job. If it will take a long time, run it in a `screen` session and check its status.
-4. Inform everyone else in the "jobs-for-blis-frodo-bilbo" channel using this format:  
-   "{Job type} on {SERVER} is using {number} cores, (approximately, optional) {number} ram, until ~(approximately) {time}."  
-   For example, "phylophlan on BLIS is using 8 cores, 100 GB ram, until ~20 Nov 9:00." Pin this message.
-5. Once your job is done, edit the message to include a big "DONE" at the beginning and unpin it.
-
-```{admonition} Rule of thumb
-- For any job, leave at least 2 cores free.
-- For short jobs, use as many cores as possible.
-- For long jobs, use maximum half of the avaliable cores. If more cores are needed, notify everyone in advance.  
-  For example, "PLANNING phylophlan on BLIS, is using 18 cores, 160 GB ram, from 19 Nov 20:00 till ~20 Nov 9:00."  
-```
 
 ## How to run long jobs using `screen`
 

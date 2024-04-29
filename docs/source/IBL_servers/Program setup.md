@@ -2,94 +2,71 @@
 
 *By C.Du [@snail123815](https://github.com/snail123815)*
 
-(Avaliable softwares can be found in directory `/vol/local/conda_envs/`, use by [activating](#run-a-program) corresponding environment)
+This tutorial provides guidance of creating environments and install programs in the created environments using `micromamba`. To install programs that are not available in any conda repositories, please ask administrators for help.
 
-We manage our softwares using [conda](https://docs.conda.io/en/latest/) virtual environments, which have become a standard tool in the field and many other tools are compatible with its standard. To avoid confusion, we will use the term "environment" to refer specifically to conda-compatible virtual environments. By using environments, we can easily manage software dependencies and avoid conflicts between different software versions.
+## What is an environment
 
-On BLIS, we use a tool called **[micromamba](https://mamba.readthedocs.io/en/latest/user_guide/micromamba.html)**, a lightweight and efficient alternative to conda, to manage these environments. A shared directory dedicated to storing, sharing, and modifying environments is created on BLIS. By default, all users on BLIS should be in a premission group called "condablis". This group grant users access to our shared environments.
-
-Please make sure you are in "condablis" group by running `groups` command. You should see "condablis" in the output of this command. If not, please contact server admin.
-
-```sh
-$ groups
-sgr condablis
-```
-
-## Run a program
-
-Before working with virtual environments, it is highly recommanded to setup a `~/.mambarc` file follow [setting up config file](#setting-up-config-file) down below.
-
-Since all softwares are installed in an environment, you have to activate it first. For example, to use a local version of AntiSMASH:
-
-```sh
-# 0. Make sure you have your shell initiated with micromamba (skip if done before)
-[user@blis ~]$ micromamba shell init -s bash -p ~/micromamba-base
-# 1. Activate environment
-(base) [user@blis ~]$ micromamba activate /vol/local/conda_envs/antismash
-# 2. Check if antismash is avaliable
-(/vol/local/conda_envs/antismash) [user@blis ~]$ antismash --help
-
-########### antiSMASH 6.1.1 #############
-
-usage: antismash [-h] [options ..] sequence
-
-
-arguments:
-  SEQUENCE  GenBank/EMBL/FASTA file(s) containing DNA.
-
---------
-Options
---------
-...
-```
-
-Note that if you setup the config file as [described](#setting-up-config-file), you may see all environments by `micromamba env list`. But activating an environemnt by its name does not work:
-
-```sh
-(base) [user@blis ~]$ micromamba env list
-
-  Name           Active  Path
-─────────────────────────────────────────────────────────
-  base           *       /home/duc_test1/micromamba-base
-  quasan                 /vol/local/conda_envs/quasan
-  rrefinder              /vol/local/conda_envs/rrefinder
-(base) [user@blis ~]$ micromamba activate quasan
-critical libmamba Cannot activate, prefix does not exist at: /home/user/micromamba-base/envs/quasan
-# Meaning you can only activate shared environments using their path
-(base) [user@blis ~]$ micromamba activate /vol/local/conda_envs/quasan
-(/vol/local/conda_envs/quasan) [user@blis ~]$
-```
-
-You can make this process less painful by creating a soft link in your home directory:
-
-```shell
-cd ~
-ln -s /vol/local/conda_envs/ genvs
-# Then you can skip the long path in you command while activating an environment
-micromamba activate ~/genvs/antismash
-```
+An environment created by conda, micromamba, or pyvenv is essentially just a folder/directory on the disk. This directory contains configuration files and dependency programs. It has a special structure to allow environment manager programs (conda/micromamba/pyvenv) to read. Do not change any content in an environment directory manually, except you understand how environment manager works and know what you are doing.
 
 ## Install a program
 
-Before working with virtual environments, it is highly recommanded to setup a `~/.mambarc` file follow [setting up config file](#setting-up-config-file) down below.
+Please make sure you have [micromamba ready to use](./Execute%20programs.md#prepare-micromamba). Before setting up virtual environments, it is highly recommended to setup a `~/.mambarc` file with the following content. It is explained in the later [section](#setting-up-config-file).
 
-Install a program using `sudo` by many users will lead to disaster. Thus all programs needs to be in a contained environment. Compatible programs that might be used by a pipeline can be installed together in one environment.
+```YAML
+envs_dirs:
+  - /vol/local/conda_envs
+pkgs_dirs:
+  - /vol/local/.conda_cache/[USERNAME]
+channels:
+  - bioconda
+  - conda-forge
+  - defaults
+auto_activate_base: true
+```
 
 Create an environment to host the software or a pipe line you want to run. Then you have all control over the environment you created.
 
-```sh
+```{code-block} shell
+---
+caption: This block includes prompt, select command to copy
+---
 # 0. Make sure you have your shell initiated with micromamba (skip if done before)
 [user@blis ~]$ micromamba shell init -s bash -p ~/micromamba-base
+[user@blis ~]$ source ~/.bashrc
+[user@blis ~]$ micromamba activate
+(base) [user@blis ~]$
+
 # 1. Create environment called multi-omics and activate it
 (base) [user@blis ~]$ micromamba create -p /vol/local/conda_envs/multi-omics
 (base) [user@blis ~]$ micromamba activate /vol/local/conda_envs/multi-omics
+
 # 2. Install software, eg. python
 (/vol/local/conda_envs/multi-omics) [user@blis ~]$ micromamba install -c conda-forge python
 ```
 
-### Do not follow tutorial with yml file
+:::{tip}
+I usually create a "soft link" to `/vol/local/conda_envs/` in home directory for easier access to all the environments. For example,
 
-Many times you will find a tutorial to setup a conda environemnt by `conda env create -f minimotif.yml minimotif`. Please **DO NOT** follow this by simply replacing `conda env` with `micromamba`.
+```sh
+ln -s /vol/local/conda_envs/ ~/genvs
+```
+
+Then I can replace all `/vol/local/conda_envs/` with `~/genvs`, much simpler.
+
+Advanced method (**do not do** if you don't know what `ln -s` means and its restrictions) is to soft link the shared environment directory to micromamba base directory:
+
+```sh
+ln -s /vol/local/conda_envs/ ~/micromamba-base/envs
+```
+
+This needs to be done when the target directory does not exist (before creating any "named" environment). The advantage of this method is that you can create environment in the shared environment directory using `-n` and may be more compatible with most program tutorial (the old ones usually assume you have sudo rights and unlimited HOME directory, which is not the case in any of the server systems.) Use this method with caution!
+:::
+
+### Do not follow tutorial with yml/yaml file
+
+`.yml` or `.yaml` file format is usually configuration files written with a variant of markup language, describing the required programs and usually their versions, i.e. *dependencies*.
+
+Many times you will find a tutorial to setup a conda environment by `conda env create -f minimotif.yml minimotif`. Please **DO NOT** follow this by simply replacing `conda env` with `micromamba`.
 
 In these cases, the `.yml` file usually looks like:
 
@@ -108,9 +85,9 @@ dependencies:
   - ...
 ```
 
-Please remove the `name:` line and save the file. (The line is telling conda or micromamba to install the environment with `-n` switch, it is not compatible with `-p` switch.)
+You need to open this file using a text editor, remove the `name:` line and save the file. The `name:` line is telling conda or micromamba to install the environment with `-n` switch, or install the dependencies it is not compatible with `-p` switch.
 
-Then:
+Then create the environment:
 
 ```sh
 # 1. Create environment using -p
@@ -120,15 +97,32 @@ Then:
 (/vol/local/conda_envs/MiniMotif) [user@blis ~]$ micromamba install -f minimotif.yml
 ```
 
-Now it should do the job.
+Now it should do the installation, follow the screen to continue.
 
-## Location of shared environments
+Why not combine into one single command? Because `-p` and `-f` parameters are not compatible.
 
-All our shared environments are stored in `/vol/local/conda_envs/`, and all cache files are stored in `/vol/loca/.conda_cache/USERNAME`.
+After installation, you can try your program to see if the help function works:
 
-Please follow the turtoral below to config your `.condarc`. All cache files will then be stored in a shared location: `/vol/local/.conda_cache/USERNAME` for easier cleanup.
+```sh
+(/vol/local/conda_envs/MiniMotif) [user@blis ~]$ python minimotif.py -h
+usage:
+-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
+Generic command:
+     minimotif.py -i [binding_profiles] -G [genome] -O [outdir]
+_____________________________________________________________________________________________
+Mandatory arguments:
+    -G  Provide a genbank file of the genome of interest for TFBS scanning
+    ...
+```
 
-### Setting up config file
+Do not forget to **deactivate** your environment before doing anything else, unless you know what you are doing. Your current activated environment is shown in the parenthesis before your command line. To deactivate:
+
+```sh
+(/vol/local/conda_envs/MiniMotif) [user@blis ~]$ micromamba deactivate
+(base) [user@blis ~]$
+```
+
+## Setting up config file
 
 The program micromamba uses a config file located in your home folder: `~/.mambarc` to store your specific configurations. Well `micromamba` *not only* check `~/.mambarc` file, but also uses `~/.condarc`, one of them is enough. (The later is used by conda)
 
@@ -141,10 +135,10 @@ pkgs_dirs:
   - /vol/local/.conda_cache/USERNAME
 ```
 
-- `env_dirs` will allow `micromamba env list` command to list all environments inclduing our shared environments.
+- `env_dirs` will allow `micromamba env list` command to list all environments inclduing our shared environments. (ignore this line if you have soft linked it to `~/micromamba_base/envs`)
 - `pkgs_dirs` set the cache dir, it is a easy-to-clean location.
 
-You can also add:
+You can also add after the above contents:
 
 ```YAML
 channels:
@@ -157,20 +151,11 @@ auto_activate_base: true
 - `channels` will allow you to skip -c option when installing packages
 - `auto_activate_base` will activate your base environment, by this, you will be using eg. python from your base environment rather than a system one.
 
-The following commands will create a soft link (shortcut) in your home directory for easier accessing the shared environments.
-
-```shell
-cd ~
-ln -s /vol/local/conda_envs/ genvs
-# Then you can skip the long path in you command while activating an environment
-micromamba activate ~/genvs/antismash
-```
-
 If you need more information on how to use micromamba, please refer to our [micromamba instruction](../basic_tools/micromamba.md#blis-users).
 
 ## Premissions of shared environments on BLIS
 
-All environments created in `/vol/local/conda_envs/` are by default belongs to the group `condablis`, all group members can activate these environments. **Only** the owner who created the environment can add or remove package. If you want to let others change your environment, you need to specifically change the premission:
+All files generated by `micromamba`, including all environments created are by default belongs to the group `condablis`, all group members can activate these environments. **Only** the owner who created the environment can add or remove package. If you want to let others change your environment, you need to specifically change the premission:
 
 ```sh
 chmod -R g+w /vol/local/conda_envs/yourEnvironment
