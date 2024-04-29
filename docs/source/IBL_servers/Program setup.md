@@ -89,7 +89,10 @@ You need to open this file using a text editor, remove the `name:` line and save
 
 Then create the environment:
 
-```sh
+```{code-block} shell
+---
+caption: This block includes prompt, select command to copy
+---
 # 1. Create environment using -p
 (base) [user@blis ~]$ micromamba create -p /vol/local/conda_envs/MiniMotif
 (base) [user@blis ~]$ micromamba activate /vol/local/conda_envs/MiniMotif
@@ -103,7 +106,10 @@ Why not combine into one single command? Because `-p` and `-f` parameters are no
 
 After installation, you can try your program to see if the help function works:
 
-```sh
+```{code-block} shell
+---
+caption: This block includes prompt, select command to copy
+---
 (/vol/local/conda_envs/MiniMotif) [user@blis ~]$ python minimotif.py -h
 usage:
 -_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-
@@ -117,7 +123,10 @@ Mandatory arguments:
 
 Do not forget to **deactivate** your environment before doing anything else, unless you know what you are doing. Your current activated environment is shown in the parenthesis before your command line. To deactivate:
 
-```sh
+```{code-block} shell
+---
+caption: This block includes prompt, select command to copy
+---
 (/vol/local/conda_envs/MiniMotif) [user@blis ~]$ micromamba deactivate
 (base) [user@blis ~]$
 ```
@@ -151,7 +160,7 @@ auto_activate_base: true
 - `channels` will allow you to skip -c option when installing packages
 - `auto_activate_base` will activate your base environment, by this, you will be using eg. python from your base environment rather than a system one.
 
-If you need more information on how to use micromamba, please refer to our [micromamba instruction](../basic_tools/micromamba.md#blis-users).
+If you need more information on how to use micromamba on your own machine, please refer to our [micromamba instruction](../basic_tools/micromamba.md).
 
 ## Premissions of shared environments on BLIS
 
